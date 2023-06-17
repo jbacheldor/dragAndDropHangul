@@ -39,6 +39,7 @@ function filtering(options) {
         filter.classList.add('filter');
         // filter.classList.add('filterType');
         filter.setAttribute('filterType', filterOption);
+        filter.setAttribute('filterOn', false);
         filterSection.append(filter);
     })
 }
@@ -51,8 +52,15 @@ allFilters.forEach(filter => {
     filter.addEventListener('click', clickFilter);
 });
 
-function clickFilter() {
-    console.log("i have been clicked");
+function clickFilter(e) {
+    console.log(e.target);
+    if (e.target.getAttribute('filteron') === "false") {
+        console.log('filter is now on');
+        e.target.setAttribute('filteron', true);
+    } else {
+        console.log('filter is now off');
+        e.target.setAttribute('filteron', false);
+    }
 }
 
 // let startPositionKoreanCharacters2 = [];
