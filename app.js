@@ -102,3 +102,22 @@ function dragDrop(e) {
         e.target.remove();
     }
 }
+
+const filterOptions = [
+    "Consonant",
+    "Tense Consonant",
+    "Aspirated Cosonant",
+    "Vowels",
+    "Y Vowels",
+    "W Vowels",
+    "Diphthongs"
+]
+
+// to-do
+function filtering() {
+
+}
+
+function createFilterBlocks() {
+
+}
