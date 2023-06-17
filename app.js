@@ -6,24 +6,24 @@ const gameBottomBoard = document.querySelector("#bottomBoard");
 const width = 8;
 const height = 5;
 
-const startPositionKorean = [
-    king, king, king, king, king, king, king, king,
+const startPositionKoreanRomanji = [
+    king, rook, pawn, queen, king, king, king, king,
     king, king, king, king, king, king, king, king,
     king, king, king, king, king, king, king, king,
     king, king, king, king, king, king, king, king,
     king, king, king, king, king, king, king, king,
 ];
 
-const startPositionSounds = [
+const startPositionKoreanCharacters = [
+    king, rook, pawn, queen, queen, queen, queen, queen,
+    queen, queen, queen, queen, queen, king, king, king,
     king, king, king, king, king, king, king, king,
     king, king, king, king, king, king, king, king,
-    king, king, king, king, king, king, king, king,
-    king, king, king, king, king, king, king, king,
-    king, king, king, king, king, king, king, king,
+    king, king, queen, queen, queen, queen, queen, queen,
 ];
 
 function createTopBoard() {
-    startPositionKorean.forEach((letter, i) => {
+    startPositionKoreanRomanji.forEach((letter, i) => {
         const { picture } = letter
         const block = document.createElement('div');
         block.classList.add('block');
@@ -34,12 +34,12 @@ function createTopBoard() {
 }
 
 function createBottomBoard() {
-    startPositionSounds.forEach((letter, i) => {
+    startPositionKoreanCharacters.forEach((letter, i) => {
         const { picture } = letter;
         const block = document.createElement('div');
         block.classList.add('block');
         if (picture != undefined) { block.innerHTML = picture; }
-        block.setAttribute('square-id', i);
+        block.setAttribute('block-id', i);
         block.setAttribute('draggable', true);
         gameBottomBoard.append(block);
     })
@@ -53,19 +53,30 @@ const allBlocks = document.querySelectorAll("#gameboard .block");
 
 allBlocks.forEach(block => {
     block.addEventListener('dragstart', dragStart);
-    block.addEventListener('drop', dragDrop)
+    block.addEventListener('dragover', dragOver);
+    block.addEventListener('drop', dragDrop);
 });
 
-let dragStartId = null;
-let draggedElement = null;
+let dragStartPosition;
+let draggedElement;
 
 function dragStart(e) {
-    dragStartId = e.target.firstChild.getAttribute('id');
-    draggedElement = e.target;
+    dragStartPosition = e.target.parentNode.getAttribute('block-id');
+    // dragStartPosition = e.target.firstChild.getAttribute('id');
+    draggedElement = e.target.firstChild;
+    console.log(draggedElement);
+}
+
+function dragOver(e) {
+    e.preventDefault();
 }
 
 function dragDrop(e) {
     e.stopPropagation();
-    e.target.parentNode.append()
-    console.log(e);
+    e.target.parentNode.append(draggedElement);
+    console.log(e.target);
+    e.target.remove();
+
+    let match;
+    let nomatch;
 }
