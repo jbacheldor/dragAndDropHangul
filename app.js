@@ -48,18 +48,30 @@ filtering(filterOptions);
 
 const allFilters = document.querySelectorAll("#gameboard .filter");
 
+const allHangulCharacters = document.querySelectorAll("#gameboard .hangul");
+const allRomanjiCharacters = document.querySelectorAll("#gameboard .romanji");
+
 allFilters.forEach(filter => {
     filter.addEventListener('click', clickFilter);
 });
 
 function clickFilter(e) {
     console.log(e.target);
+    const type = e.target.getAttribute('filtertype');
+    const string = "[type=\"" + type + "\"]";
+    console.log(string);
     if (e.target.getAttribute('filteron') === "false") {
-        console.log('filter is now on');
         e.target.setAttribute('filteron', true);
+        const result = document.querySelectorAll(string);
+        result.forEach(res => {
+            res.setAttribute('clickable', false);
+        })
     } else {
-        console.log('filter is now off');
         e.target.setAttribute('filteron', false);
+        const result = document.querySelectorAll(string);
+        result.forEach(res => {
+            res.setAttribute('clickable', true);
+        })
     }
 }
 

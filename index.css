@@ -68,3 +68,8 @@ path {
     flex-wrap: wrap;
     justify-content: center;
 }
+
+div[clickable="false"] {
+    pointer-events: none;
+    background-color: black;
+}
