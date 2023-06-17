@@ -64,6 +64,7 @@ function clickFilter(e) {
         e.target.setAttribute('filteron', true);
         const result = document.querySelectorAll(string);
         result.forEach(res => {
+            res.parentNode.setAttribute('draggable', false);
             res.setAttribute('clickable', false);
         })
     } else {
@@ -71,6 +72,7 @@ function clickFilter(e) {
         const result = document.querySelectorAll(string);
         result.forEach(res => {
             res.setAttribute('clickable', true);
+            res.parentNode.setAttribute('draggable', true);
         })
     }
 }
