@@ -7,20 +7,39 @@ const width = 8;
 const height = 5;
 
 const startPositionKoreanRomanji = [
-    king, rook, pawn, queen, king, king, king, king,
-    king, king, king, king, king, king, king, king,
-    king, king, king, king, king, king, king, king,
-    king, king, king, king, king, king, king, king,
-    king, king, king, king, king, king, king, king,
-];
-
-const startPositionKoreanCharacters = [
-    king, rook, pawn, queen, queen, queen, queen, queen,
+    king1, rook1, pawn1, queen1, chess1, thing11, thing21, queen1,
     queen, queen, queen, queen, queen, king, king, king,
     king, king, king, king, king, king, king, king,
     king, king, king, king, king, king, king, king,
     king, king, queen, queen, queen, queen, queen, queen,
 ];
+
+const startPositionKoreanCharacters = [
+    king, rook, pawn, queen, chess, thing1, thing2, queen,
+    queen, queen, queen, queen, queen, king, king, king,
+    king, king, king, king, king, king, king, king,
+    king, king, king, king, king, king, king, king,
+    king, king, queen, queen, queen, queen, queen, queen,
+];
+
+// let startPositionKoreanCharacters2 = [];
+
+// function randomizeArray(set) {
+//     let items = Array.from(set);
+//     let count;
+//     items.forEach(() => {
+//         count = Math.floor(Math.random() * items.length);
+//         console.log("current count", count);
+//         console.log("start position: ", startPositionKoreanCharacters2);
+//         console.log("items ! ", items);
+//         startPositionKoreanCharacters2.push(items[count]);
+//         delete items[count];
+//     })
+//     return startPositionKoreanCharacters2;
+// }
+
+// console.log(randomizeArray(Alphabet));
+// console.log(startPositionKoreanCharacters2);
 
 function createTopBoard() {
     startPositionKoreanRomanji.forEach((letter, i) => {
@@ -66,7 +85,6 @@ function dragStart(e) {
     dragStartPosition = e.target.parentNode.getAttribute('block-id');
     // dragStartPosition = e.target.firstChild.getAttribute('id');
     draggedElement = e.target.firstChild;
-    console.log(draggedElement);
 }
 
 function dragOver(e) {
@@ -75,12 +93,12 @@ function dragOver(e) {
 
 function dragDrop(e) {
     e.stopPropagation();
-    let match = e.target.classList.contains('');
-    if (e.target.parentNode.classList.contains('romanji')) {
+    let draggedId = draggedElement.getAttribute('id');
+
+    let targetAnswer = e.target.getAttribute('answer');
+    console.log(draggedElement);
+    if (e.target.parentNode.classList.contains('romanji') && (draggedId === targetAnswer)) {
         e.target.parentNode.append(draggedElement);
         e.target.remove();
     }
-
-
-    let nomatch;
 }
