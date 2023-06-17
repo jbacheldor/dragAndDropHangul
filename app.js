@@ -27,6 +27,7 @@ function createTopBoard() {
         const { picture } = letter
         const block = document.createElement('div');
         block.classList.add('block');
+        block.classList.add('romanji');
         if (picture != undefined) { block.innerHTML = picture; }
         block.setAttribute('block-id', i);
         gameTopBoard.append(block);
@@ -38,6 +39,7 @@ function createBottomBoard() {
         const { picture } = letter;
         const block = document.createElement('div');
         block.classList.add('block');
+        block.classList.add('hangul');
         if (picture != undefined) { block.innerHTML = picture; }
         block.setAttribute('block-id', i);
         block.setAttribute('draggable', true);
@@ -73,10 +75,12 @@ function dragOver(e) {
 
 function dragDrop(e) {
     e.stopPropagation();
-    e.target.parentNode.append(draggedElement);
-    console.log(e.target);
-    e.target.remove();
+    let match = e.target.classList.contains('');
+    if (e.target.parentNode.classList.contains('romanji')) {
+        e.target.parentNode.append(draggedElement);
+        e.target.remove();
+    }
 
-    let match;
+
     let nomatch;
 }
