@@ -30,6 +30,10 @@ path {
     z-index: -14;
 }
 
+.hangul {
+    cursor: pointer;
+}
+
 .letter {
     position: relative;
     z-index: 9;
@@ -47,4 +51,20 @@ path {
     background-color: lightblue;
     display: flex;
     flex-wrap: wrap;
+}
+
+.filter {
+    height: 40px;
+    width: 40px;
+    margin: 5px;
+    background-color: gainsboro;
+    cursor: pointer;
+}
+
+#filterSection {
+    height: 50px;
+    background-color: lightgoldenrodyellow;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 }

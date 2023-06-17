@@ -1,6 +1,6 @@
-const gameBoard = document.querySelector("#gameboard");
 const gameTopBoard = document.querySelector("#topBoard");
 const gameBottomBoard = document.querySelector("#bottomBoard");
+const filterSection = document.querySelector("#filterSection");
 
 // 40 letters in total 
 const width = 8;
@@ -21,6 +21,39 @@ const startPositionKoreanCharacters = [
     king, king, king, king, king, king, king, king,
     king, king, queen, queen, queen, queen, queen, queen,
 ];
+
+
+const filterOptions = [
+    "Consonant",
+    "Tense Consonant",
+    "Aspirated Cosonant",
+    "Vowels",
+    "Y Vowels",
+    "W Vowels",
+    "Diphthongs"
+]
+
+function filtering(options) {
+    options.forEach((filterOption) => {
+        const filter = document.createElement('div');
+        filter.classList.add('filter');
+        // filter.classList.add('filterType');
+        filter.setAttribute('filterType', filterOption);
+        filterSection.append(filter);
+    })
+}
+
+filtering(filterOptions);
+
+const allFilters = document.querySelectorAll("#gameboard .filter");
+
+allFilters.forEach(filter => {
+    filter.addEventListener('click', clickFilter);
+});
+
+function clickFilter() {
+    console.log("i have been clicked");
+}
 
 // let startPositionKoreanCharacters2 = [];
 
@@ -69,7 +102,6 @@ function createBottomBoard() {
 createTopBoard();
 createBottomBoard();
 
-
 const allBlocks = document.querySelectorAll("#gameboard .block");
 
 allBlocks.forEach(block => {
@@ -101,23 +133,4 @@ function dragDrop(e) {
         e.target.parentNode.append(draggedElement);
         e.target.remove();
     }
-}
-
-const filterOptions = [
-    "Consonant",
-    "Tense Consonant",
-    "Aspirated Cosonant",
-    "Vowels",
-    "Y Vowels",
-    "W Vowels",
-    "Diphthongs"
-]
-
-// to-do
-function filtering() {
-
-}
-
-function createFilterBlocks() {
-
 }
