@@ -96,7 +96,7 @@ function clickFilter(e) {
 // console.log(randomizeArray(Alphabet));
 // console.log(startPositionKoreanCharacters2);
 
-function createTopBoard() {
+function createBottomBoard() {
     startPositionKoreanRomanji.forEach((letter, i) => {
         const { picture } = letter
         const block = document.createElement('div');
@@ -104,11 +104,11 @@ function createTopBoard() {
         block.classList.add('romanji');
         if (picture != undefined) { block.innerHTML = picture; }
         block.setAttribute('block-id', i);
-        gameTopBoard.append(block);
+        gameBottomBoard.append(block);
     })
 }
 
-function createBottomBoard() {
+function createTopBoard() {
     startPositionKoreanCharacters.forEach((letter, i) => {
         const { picture } = letter;
         const block = document.createElement('div');
@@ -117,7 +117,7 @@ function createBottomBoard() {
         if (picture != undefined) { block.innerHTML = picture; }
         block.setAttribute('block-id', i);
         block.setAttribute('draggable', true);
-        gameBottomBoard.append(block);
+        gameTopBoard.append(block);
     })
 }
 
