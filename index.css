@@ -1,0 +1,49 @@
+#gameboard {
+    width: 400px;
+    height: 400px;
+    /* background-color: transparent;
+    display: flex;
+    flex-wrap: wrap; */
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+.block {
+    height: 40px;
+    width: 40px;
+    position: relative;
+}
+
+.block svg {
+    height: 30px;
+    width: 30px;
+    margin: 5px;
+    position: relative;
+    z-index: -9;
+}
+
+path {
+    position: relative;
+    z-index: -10;
+}
+
+.letter {
+    position: relative;
+    z-index: 9;
+}
+
+#topBoard {
+    height: 200px;
+    background-color: bisque;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#bottomBoard {
+    height: 200px;
+    background-color: lightblue;
+    display: flex;
+    flex-wrap: wrap;
+}
