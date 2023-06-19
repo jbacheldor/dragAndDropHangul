@@ -15,11 +15,11 @@ const startPositionKoreanCharacters = [
 ];
 
 const startPositionKoreanRomanji = [
-    king1, rook1, pawn1, queen1, chess1, thing11, thing21, queen1,
-    queen1, queen1, queen1, queen1, queen1, king1, king1, king1,
-    king1, king1, king1, king1, king1, king1, king1, king1,
-    king1, king1, king1, king1, king1, king1, king1, king1,
-    king1, king1, queen1, queen1, queen1, queen1, queen1, queen1,
+    gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
+    gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
+    gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
+    gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
+    gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
 ];
 
 
