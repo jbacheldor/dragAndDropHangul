@@ -6,16 +6,16 @@ const filterSection = document.querySelector("#filterSection");
 const width = 8;
 const height = 5;
 
-const startPositionKoreanRomanji = [
-    king1, rook1, pawn1, queen1, chess1, thing11, thing21, queen1,
+const startPositionKoreanCharacters = [
+    king, rook, pawn, queen, chess, thing1, thing2, queen,
     queen, queen, queen, queen, queen, king, king, king,
     king, king, king, king, king, king, king, king,
     king, king, king, king, king, king, king, king,
-    king, king, queen, queen, queen, queen, queen, queen,
+    king, king, queen, queen, queen, queen, queen, testgk,
 ];
 
-const startPositionKoreanCharacters = [
-    king, rook, pawn, queen, chess, thing1, thing2, queen,
+const startPositionKoreanRomanji = [
+    king1, rook1, pawn1, queen1, chess1, thing11, thing21, queen1,
     queen, queen, queen, queen, queen, king, king, king,
     king, king, king, king, king, king, king, king,
     king, king, king, king, king, king, king, king,
@@ -37,7 +37,6 @@ function filtering(options) {
     options.forEach((filterOption) => {
         const filter = document.createElement('div');
         filter.classList.add('filter');
-        // filter.classList.add('filterType');
         filter.setAttribute('filterType', filterOption);
         filter.setAttribute('filterOn', false);
         filterSection.append(filter);
@@ -77,13 +76,13 @@ function clickFilter(e) {
     }
 }
 
-// let startPositionKoreanCharacters2 = [];
+// let startPositionKoreanCharacters2 = new Map([]);
 
 // function randomizeArray(set) {
-//     let items = Array.from(set);
+//     let items = AlphabetHangul.size;
 //     let count;
 //     items.forEach(() => {
-//         count = Math.floor(Math.random() * items.length);
+//         count = Math.floor(Math.random() * items);
 //         console.log("current count", count);
 //         console.log("start position: ", startPositionKoreanCharacters2);
 //         console.log("items ! ", items);
@@ -93,8 +92,13 @@ function clickFilter(e) {
 //     return startPositionKoreanCharacters2;
 // }
 
-// console.log(randomizeArray(Alphabet));
+// console.log(randomizeArray(AlphabetHangul));
 // console.log(startPositionKoreanCharacters2);
+
+// you have a list of hash values 
+// for each value 
+
+
 
 function createBottomBoard() {
     startPositionKoreanRomanji.forEach((letter, i) => {
