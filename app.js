@@ -36,6 +36,7 @@ const filterOptions = [
 function filtering(options) {
     options.forEach((filterOption) => {
         const filter = document.createElement('div');
+        filter.innerHTML = filterOption;
         filter.classList.add('filter');
         filter.setAttribute('filterType', filterOption);
         filter.setAttribute('filterOn', false);

@@ -56,9 +56,14 @@ path {
 
 .filter {
     height: 40px;
-    width: 40px;
+    width: 52px;
     margin: 5px;
+    font-size: 10px;
     background-color: gainsboro;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
     cursor: pointer;
 }
 
@@ -81,4 +86,10 @@ div[draggable="true"] {
 
 .romanji {
     font-weight: bold;
+}
+
+#header {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(43, 43, 43, 0.213);
 }
