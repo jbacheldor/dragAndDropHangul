@@ -7,19 +7,19 @@ const width = 8;
 const height = 5;
 
 const startPositionKoreanCharacters = [
-    king, rook, pawn, queen, chess, thing1, thing2, queen,
-    queen, queen, queen, queen, queen, king, king, king,
-    king, king, king, king, king, king, king, king,
-    king, king, king, king, king, king, king, king,
-    king, king, queen, queen, queen, queen, queen, testgk,
+    gk, rl, dt, n, m, bp, st, ng,
+    gk, rl, dt, n, m, bp, st, ng,
+    gk, rl, dt, n, m, bp, st, ng,
+    gk, rl, dt, n, m, bp, st, ng,
+    gk, rl, dt, n, m, bp, st, ng,
 ];
 
 const startPositionKoreanRomanji = [
     king1, rook1, pawn1, queen1, chess1, thing11, thing21, queen1,
-    queen, queen, queen, queen, queen, king, king, king,
-    king, king, king, king, king, king, king, king,
-    king, king, king, king, king, king, king, king,
-    king, king, queen, queen, queen, queen, queen, queen,
+    queen1, queen1, queen1, queen1, queen1, king1, king1, king1,
+    king1, king1, king1, king1, king1, king1, king1, king1,
+    king1, king1, king1, king1, king1, king1, king1, king1,
+    king1, king1, queen1, queen1, queen1, queen1, queen1, queen1,
 ];
 
 
@@ -100,7 +100,7 @@ function clickFilter(e) {
 
 
 
-function createBottomBoard() {
+function createTopBoard() {
     startPositionKoreanRomanji.forEach((letter, i) => {
         const { picture } = letter
         const block = document.createElement('div');
@@ -108,11 +108,11 @@ function createBottomBoard() {
         block.classList.add('romanji');
         if (picture != undefined) { block.innerHTML = picture; }
         block.setAttribute('block-id', i);
-        gameBottomBoard.append(block);
+        gameTopBoard.append(block);
     })
 }
 
-function createTopBoard() {
+function createBottomBoard() {
     startPositionKoreanCharacters.forEach((letter, i) => {
         const { picture } = letter;
         const block = document.createElement('div');
@@ -121,7 +121,7 @@ function createTopBoard() {
         if (picture != undefined) { block.innerHTML = picture; }
         block.setAttribute('block-id', i);
         block.setAttribute('draggable', true);
-        gameTopBoard.append(block);
+        gameBottomBoard.append(block);
     })
 }
 
