@@ -1,6 +1,6 @@
 #gameboard {
-    width: 400px;
-    height: 400px;
+    width: 500px;
+    height: 500px;
     /* background-color: transparent;
     display: flex;
     flex-wrap: wrap; */
@@ -11,19 +11,24 @@ body {
 }
 
 .block {
-    height: 40px;
-    width: 40px;
+    height: 50px;
+    width: 50px;
     position: relative;
-    z-index: 1;
+    color: black;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.block svg {
+
+/* .block svg {
     height: 30px;
     width: 30px;
     margin: 5px;
     position: relative;
     z-index: -13;
-}
+} */
 
 path {
     position: relative;
@@ -36,14 +41,14 @@ path {
 }
 
 #topBoard {
-    height: 200px;
+    height: 300px;
     background-color: bisque;
     display: flex;
     flex-wrap: wrap;
 }
 
 #bottomBoard {
-    height: 200px;
+    height: 300px;
     background-color: lightblue;
     display: flex;
     flex-wrap: wrap;
@@ -67,9 +72,13 @@ path {
 
 div[clickable="false"] {
     pointer-events: none;
-    background-color: black;
+    color: rgba(43, 43, 43, 0.213);
 }
 
 div[draggable="true"] {
     cursor: pointer;
+}
+
+.romanji {
+    font-weight: bold;
 }
