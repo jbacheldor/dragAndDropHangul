@@ -96,44 +96,121 @@ const AlphabetHangulLetters = new Map([
         "character": "ㅍ",
         "answer": "p",
     }],
+    ["a", {
+        "picture": '<div class="letter" id="a">ㅏ</div',
+        "classification": "Vowels",
+        "character": "ㅏ",
+        "answer": "a",
+    }],
+    ["ae", {
+        "picture": '<div class="letter" id="ae">ㅐ</div',
+        "classification": "Vowels",
+        "character": "ㅐ",
+        "answer": "ae",
+    }],
+    ["eo", {
+        "picture": '<div class="letter" id="eo">ㅓ</div',
+        "classification": "Vowels",
+        "character": "ㅓ",
+        "answer": "eo",
+    }],
+    ["e", {
+        "picture": '<div class="letter" id="e">ㅔ</div',
+        "classification": "Vowels",
+        "character": "ㅔ",
+        "answer": "e",
+    }],
+    ["eu", {
+        "picture": '<div class="letter" id="eu">ㅡ</div',
+        "classification": "Vowels",
+        "character": "ㅡ",
+        "answer": "eu",
+    }],
+    ["i", {
+        "picture": '<div class="letter" id="i">ㅣ</div',
+        "classification": "Vowels",
+        "character": "ㅣ",
+        "answer": "i",
+    }],
+    ["ya", {
+        "picture": '<div class="letter" id="ya">ㅑ</div',
+        "classification": "Y Vowels",
+        "character": "ㅑ",
+        "answer": "ya",
+    }],
+    ["yae", {
+        "picture": '<div class="letter" id="yae">ㅒ</div',
+        "classification": "Y Vowels",
+        "character": "ㅒ",
+        "answer": "yae",
+    }],
+    ["yeo", {
+        "picture": '<div class="letter" id="yeo">ㅕ</div',
+        "classification": "Y Vowels",
+        "character": "ㅕ",
+        "answer": "yeo",
+    }],
+    ["ye", {
+        "picture": '<div class="letter" id="ye">ㅖ</div',
+        "classification": "Y Vowels",
+        "character": "ㅖ",
+        "answer": "ye",
+    }],
+    ["yo", {
+        "picture": '<div class="letter" id="yo">ㅛ</div',
+        "classification": "Y Vowels",
+        "character": "ㅛ",
+        "answer": "yo",
+    }],
+    ["yu", {
+        "picture": '<div class="letter" id="yu">ㅠ</div',
+        "classification": "Y Vowels",
+        "character": "ㅠ",
+        "answer": "yu",
+    }],
+    ["wa", {
+        "picture": '<div class="letter" id="wa">ㅘ</div',
+        "classification": "Diphthongs",
+        "character": "ㅘ",
+        "answer": "wa",
+    }],
+    ["wae", {
+        "picture": '<div class="letter" id="wae">ㅙ</div',
+        "classification": "Diphthongs",
+        "character": "ㅙ",
+        "answer": "wae",
+    }],
+    ["oe", {
+        "picture": '<div class="letter" id="oe">ㅚ</div',
+        "classification": "Diphthongs",
+        "character": "ㅚ",
+        "answer": "oe",
+    }],
+    ["wo", {
+        "picture": '<div class="letter" id="wo">ㅝ</div',
+        "classification": "Diphthongs",
+        "character": "ㅝ",
+        "answer": "wo",
+    }],
+    ["we", {
+        "picture": '<div class="letter" id="we">ㅞ</div',
+        "classification": "Diphthongs",
+        "character": "ㅞ",
+        "answer": "we",
+    }],
+    ["wi", {
+        "picture": '<div class="letter" id="wi">ㅟ</div',
+        "classification": "Diphthongs",
+        "character": "ㅟ",
+        "answer": "wi",
+    }],
+    ["ui", {
+        "picture": '<div class="letter" id="ui">ㅢ</div',
+        "classification": "Diphthongs",
+        "character": "ㅢ",
+        "answer": "ui",
+    }],
 ]);
-
-[
-    [{
-        "ㄲ": "kk",
-        "ㄸ": "tt",
-        "ㅃ": "pp",
-        "ㅆ": "ss",
-        "ㅉ": "jj",
-    }, "Tense Consonants"],
-    [{
-        "ㅏ": "a",
-        "ㅐ": "ae",
-        "ㅓ": "eo",
-        "ㅔ": "e",
-        "ㅗ": "o",
-        "ㅜ": "u",
-        "ㅡ": "eu",
-        "ㅣ": "i",
-    }, "Vowels"],
-    [{
-        "ㅑ": "ya",
-        "ㅒ": "yae",
-        "ㅕ": "yeo",
-        "ㅖ": "ye",
-        "ㅛ": "yo",
-        "ㅠ": "yu"
-    }, "Y Vowels"],
-    [{
-        "ㅘ": "wa",
-        "ㅙ": "wae",
-        "ㅚ": "oe",
-        "ㅝ": "wo",
-        "ㅞ": "we",
-        "ㅟ": "wi",
-        "ㅢ	": "ui"
-    }, "Diphthongs"]
-]
 
 const AlphabetRomanjiLetters = new Map([
     ["g/k", {
@@ -225,6 +302,144 @@ const AlphabetRomanjiLetters = new Map([
         "classification": "Aspirated Consonants",
         "character": "ㅍ",
         "answer": "p",
+    }],
+    ["ch/t", {
+        "picture": '<div class="letter" id="ch/t">ㅊ</div',
+        "classification": "Aspirated Consonants",
+        "character": "ㅊ",
+        "answer": "ch/t",
+    }],
+    ["k", {
+        "picture": '<div class="letter" id="k">ㅋ</div',
+        "classification": "Aspirated Consonants",
+        "character": "ㅋ",
+        "answer": "k",
+    }],
+    ["t", {
+        "picture": '<div class="letter" id="t">ㅌ</div',
+        "classification": "Aspirated Consonants",
+        "character": "ㅌ",
+        "answer": "t",
+    }],
+    ["p", {
+        "picture": '<div class="letter" id="p">ㅍ</div',
+        "classification": "Aspirated Consonants",
+        "character": "ㅍ",
+        "answer": "p",
+    }],
+    ["a", {
+        "picture": '<div class="letter" id="a">ㅏ</div',
+        "classification": "Vowels",
+        "character": "ㅏ",
+        "answer": "a",
+    }],
+    ["ae", {
+        "picture": '<div class="letter" id="ae">ㅐ</div',
+        "classification": "Vowels",
+        "character": "ㅐ",
+        "answer": "ae",
+    }],
+    ["eo", {
+        "picture": '<div class="letter" id="eo">ㅓ</div',
+        "classification": "Vowels",
+        "character": "ㅓ",
+        "answer": "eo",
+    }],
+    ["e", {
+        "picture": '<div class="letter" id="e">ㅔ</div',
+        "classification": "Vowels",
+        "character": "ㅔ",
+        "answer": "e",
+    }],
+    ["eu", {
+        "picture": '<div class="letter" id="eu">ㅡ</div',
+        "classification": "Vowels",
+        "character": "ㅡ",
+        "answer": "eu",
+    }],
+    ["i", {
+        "picture": '<div class="letter" id="i">ㅣ</div',
+        "classification": "Vowels",
+        "character": "ㅣ",
+        "answer": "i",
+    }],
+    ["ya", {
+        "picture": '<div class="letter" id="ya">ㅑ</div',
+        "classification": "Y Vowels",
+        "character": "ㅑ",
+        "answer": "ya",
+    }],
+    ["yae", {
+        "picture": '<div class="letter" id="yae">ㅒ</div',
+        "classification": "Y Vowels",
+        "character": "ㅒ",
+        "answer": "yae",
+    }],
+    ["yeo", {
+        "picture": '<div class="letter" id="yeo">ㅕ</div',
+        "classification": "Y Vowels",
+        "character": "ㅕ",
+        "answer": "yeo",
+    }],
+    ["ye", {
+        "picture": '<div class="letter" id="ye">ㅖ</div',
+        "classification": "Y Vowels",
+        "character": "ㅖ",
+        "answer": "ye",
+    }],
+    ["yo", {
+        "picture": '<div class="letter" id="yo">ㅛ</div',
+        "classification": "Y Vowels",
+        "character": "ㅛ",
+        "answer": "yo",
+    }],
+    ["yu", {
+        "picture": '<div class="letter" id="yu">ㅠ</div',
+        "classification": "Y Vowels",
+        "character": "ㅠ",
+        "answer": "yu",
+    }],
+    ["wa", {
+        "picture": '<div class="letter" id="wa">ㅘ</div',
+        "classification": "Diphthongs",
+        "character": "ㅘ",
+        "answer": "wa",
+    }],
+    ["wae", {
+        "picture": '<div class="letter" id="wae">ㅙ</div',
+        "classification": "Diphthongs",
+        "character": "ㅙ",
+        "answer": "wae",
+    }],
+    ["oe", {
+        "picture": '<div class="letter" id="oe">ㅚ</div',
+        "classification": "Diphthongs",
+        "character": "ㅚ",
+        "answer": "oe",
+    }],
+    ["wo", {
+        "picture": '<div class="letter" id="wo">ㅝ</div',
+        "classification": "Diphthongs",
+        "character": "ㅝ",
+        "answer": "wo",
+    }],
+    ["we", {
+        "picture": '<div class="letter" id="we">ㅞ</div',
+        "classification": "Diphthongs",
+        "character": "ㅞ",
+        "answer": "we",
+    }],
+    ["wi", {
+        "picture": '<div class="letter" id="wi">ㅟ</div',
+        "classification": "Diphthongs",
+        "character": "ㅟ",
+        "answer": "wi",
+    }],
+    ["ui", {
+        "picture": '<div class="letter" id="ui">ㅢ</div',
+        "classification": "Diphthongs",
+        "character": "ㅢ",
+        "answer": "ui",
     }],
 ])
 
