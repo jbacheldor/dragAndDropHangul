@@ -102,28 +102,48 @@ function clickFilter(e) {
 
 
 function createTopBoard() {
-    startPositionKoreanRomanji.forEach((letter, i) => {
-        const { picture } = letter
+    AlphabetRomanjiLetters.forEach((romanjiLetter, i) => {
+        const { picture } = romanjiLetter;
         const block = document.createElement('div');
         block.classList.add('block');
         block.classList.add('romanji');
         if (picture != undefined) { block.innerHTML = picture; }
         block.setAttribute('block-id', i);
-        gameTopBoard.append(block);
-    })
+        gameTopBoard.append(block)
+    });
+    // startPositionKoreanRomanji.forEach((letter, i) => {
+    //     const { picture } = letter
+    //     const block = document.createElement('div');
+    //     block.classList.add('block');
+    //     block.classList.add('romanji');
+    //     if (picture != undefined) { block.innerHTML = picture; }
+    //     block.setAttribute('block-id', i);
+    //     gameTopBoard.append(block);
+    // })
 }
 
 function createBottomBoard() {
-    startPositionKoreanCharacters.forEach((letter, i) => {
-        const { picture } = letter;
-        const block = document.createElement('div');
-        block.classList.add('block');
-        block.classList.add('hangul');
-        if (picture != undefined) { block.innerHTML = picture; }
-        block.setAttribute('block-id', i);
-        block.setAttribute('draggable', true);
-        gameBottomBoard.append(block);
-    })
+
+    AlphabetHangulLetters.forEach((hangulLetter, i) => {
+            const { picture } = hangulLetter;
+            const block = document.createElement('div');
+            block.classList.add('block');
+            block.classList.add('hangul');
+            if (picture != undefined) { block.innerHTML = picture; }
+            block.setAttribute('block-id', i);
+            block.setAttribute('draggable', true);
+            gameBottomBoard.append(block);
+        })
+        // startPositionKoreanCharacters.forEach((letter, i) => {
+        //     const { picture } = letter;
+        //     const block = document.createElement('div');
+        //     block.classList.add('block');
+        //     block.classList.add('hangul');
+        //     if (picture != undefined) { block.innerHTML = picture; }
+        //     block.setAttribute('block-id', i);
+        //     block.setAttribute('draggable', true);
+        //     gameBottomBoard.append(block);
+        // })
 }
 
 createTopBoard();
