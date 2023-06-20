@@ -1,34 +1,89 @@
-const gameBoard = document.querySelector("#gameboard");
 const gameTopBoard = document.querySelector("#topBoard");
 const gameBottomBoard = document.querySelector("#bottomBoard");
+const filterSection = document.querySelector("#filterSection");
 
 // 40 letters in total 
 const width = 8;
 const height = 5;
 
-const startPositionKoreanRomanji = [
-    king1, rook1, pawn1, queen1, chess1, thing11, thing21, queen1,
-    queen, queen, queen, queen, queen, king, king, king,
-    king, king, king, king, king, king, king, king,
-    king, king, king, king, king, king, king, king,
-    king, king, queen, queen, queen, queen, queen, queen,
-];
+// const startPositionKoreanCharacters = [
+//     gk, rl, dt, n, m, bp, st, ng,
+//     gk, rl, dt, n, m, bp, st, ng,
+//     gk, rl, dt, n, m, bp, st, ng,
+//     gk, rl, dt, n, m, bp, st, ng,
+//     gk, rl, dt, n, m, bp, st, ng,
+// ];
 
-const startPositionKoreanCharacters = [
-    king, rook, pawn, queen, chess, thing1, thing2, queen,
-    queen, queen, queen, queen, queen, king, king, king,
-    king, king, king, king, king, king, king, king,
-    king, king, king, king, king, king, king, king,
-    king, king, queen, queen, queen, queen, queen, queen,
-];
+// const startPositionKoreanRomanji = [
+//     gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
+//     gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
+//     gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
+//     gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
+//     gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
+// ];
 
-// let startPositionKoreanCharacters2 = [];
+
+const filterOptions = [
+    "Consonant",
+    "Tense Consonant",
+    "Aspirated Cosonant",
+    "Vowels",
+    "Y Vowels",
+    "W Vowels",
+    "Diphthongs"
+]
+
+function filtering(options) {
+    options.forEach((filterOption) => {
+        const filter = document.createElement('div');
+        filter.innerHTML = filterOption;
+        filter.classList.add('filter');
+        filter.setAttribute('filterType', filterOption);
+        filter.setAttribute('filterOn', false);
+        filterSection.append(filter);
+    })
+}
+
+filtering(filterOptions);
+
+const allFilters = document.querySelectorAll("#gameboard .filter");
+
+const allHangulCharacters = document.querySelectorAll("#gameboard .hangul");
+const allRomanjiCharacters = document.querySelectorAll("#gameboard .romanji");
+
+allFilters.forEach(filter => {
+    filter.addEventListener('click', clickFilter);
+});
+
+function clickFilter(e) {
+    console.log(e.target);
+    const type = e.target.getAttribute('filtertype');
+    const string = "[type=\"" + type + "\"]";
+    console.log(string);
+    if (e.target.getAttribute('filteron') === "false") {
+        e.target.setAttribute('filteron', true);
+        const result = document.querySelectorAll(string);
+        result.forEach(res => {
+            res.parentNode.setAttribute('draggable', false);
+            res.setAttribute('clickable', false);
+        })
+    } else {
+        e.target.setAttribute('filteron', false);
+        const result = document.querySelectorAll(string);
+        result.forEach(res => {
+            res.setAttribute('clickable', true);
+            res.parentNode.setAttribute('draggable', true);
+        })
+    }
+}
+
+// let startPositionKoreanCharacters2 = new Map([]);
 
 // function randomizeArray(set) {
-//     let items = Array.from(set);
+//     let items = AlphabetHangul.size;
 //     let count;
 //     items.forEach(() => {
-//         count = Math.floor(Math.random() * items.length);
+//         count = Math.floor(Math.random() * items);
 //         console.log("current count", count);
 //         console.log("start position: ", startPositionKoreanCharacters2);
 //         console.log("items ! ", items);
@@ -38,37 +93,41 @@ const startPositionKoreanCharacters = [
 //     return startPositionKoreanCharacters2;
 // }
 
-// console.log(randomizeArray(Alphabet));
+// console.log(randomizeArray(AlphabetHangul));
 // console.log(startPositionKoreanCharacters2);
 
-function createTopBoard() {
-    startPositionKoreanRomanji.forEach((letter, i) => {
-        const { picture } = letter
+// you have a list of hash values 
+// for each value 
+
+
+
+function createBottomBoard() {
+    Alphabet.forEach((romanjiLetter, i) => {
+        const { romanjiBothLetter } = romanjiLetter;
         const block = document.createElement('div');
         block.classList.add('block');
         block.classList.add('romanji');
-        if (picture != undefined) { block.innerHTML = picture; }
+        if (romanjiBothLetter != undefined) { block.innerHTML = romanjiBothLetter; }
+        block.setAttribute('block-id', i);
+        block.setAttribute('draggable', true);
+        gameBottomBoard.append(block)
+    });
+}
+
+function createTopBoard() {
+    Alphabet.forEach((hangulLetter, i) => {
+        const { hangulLetterElement } = hangulLetter;
+        const block = document.createElement('div');
+        block.classList.add('block');
+        block.classList.add('hangul');
+        if (hangulLetterElement != undefined) { block.innerHTML = hangulLetterElement; }
         block.setAttribute('block-id', i);
         gameTopBoard.append(block);
     })
 }
 
-function createBottomBoard() {
-    startPositionKoreanCharacters.forEach((letter, i) => {
-        const { picture } = letter;
-        const block = document.createElement('div');
-        block.classList.add('block');
-        block.classList.add('hangul');
-        if (picture != undefined) { block.innerHTML = picture; }
-        block.setAttribute('block-id', i);
-        block.setAttribute('draggable', true);
-        gameBottomBoard.append(block);
-    })
-}
-
 createTopBoard();
 createBottomBoard();
-
 
 const allBlocks = document.querySelectorAll("#gameboard .block");
 
@@ -101,23 +160,4 @@ function dragDrop(e) {
         e.target.parentNode.append(draggedElement);
         e.target.remove();
     }
-}
-
-const filterOptions = [
-    "Consonant",
-    "Tense Consonant",
-    "Aspirated Cosonant",
-    "Vowels",
-    "Y Vowels",
-    "W Vowels",
-    "Diphthongs"
-]
-
-// to-do
-function filtering() {
-
-}
-
-function createFilterBlocks() {
-
 }

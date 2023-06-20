@@ -1,6 +1,6 @@
 #gameboard {
-    width: 400px;
-    height: 400px;
+    width: 500px;
+    height: 500px;
     /* background-color: transparent;
     display: flex;
     flex-wrap: wrap; */
@@ -11,19 +11,25 @@ body {
 }
 
 .block {
-    height: 40px;
-    width: 40px;
+    height: 50px;
+    width: 50px;
     position: relative;
-    z-index: 1;
+    color: black;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
 }
 
-.block svg {
+
+/* .block svg {
     height: 30px;
     width: 30px;
     margin: 5px;
     position: relative;
     z-index: -13;
-}
+} */
 
 path {
     position: relative;
@@ -36,15 +42,57 @@ path {
 }
 
 #topBoard {
-    height: 200px;
+    height: 300px;
     background-color: bisque;
     display: flex;
     flex-wrap: wrap;
 }
 
 #bottomBoard {
-    height: 200px;
+    height: 300px;
     background-color: lightblue;
     display: flex;
     flex-wrap: wrap;
+}
+
+.filter {
+    height: 40px;
+    width: 52px;
+    margin: 5px;
+    font-size: 10px;
+    background-color: gainsboro;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    cursor: pointer;
+}
+
+#filterSection {
+    height: 50px;
+    background-color: lightgoldenrodyellow;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+div[clickable="false"] {
+    pointer-events: none;
+    color: rgba(43, 43, 43, 0.213);
+}
+
+div[draggable="true"] {
+    cursor: pointer;
+}
+
+.hangul {
+    font-weight: bold;
+}
+
+#header {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(43, 43, 43, 0.213);
+    padding: 10px;
+    font-size: 20px;
 }
