@@ -1,39 +1,83 @@
-const gameTopBoard = document.querySelector("#topBoard");
-const gameBottomBoard = document.querySelector("#bottomBoard");
-const filterSection = document.querySelector("#filterSection");
+const menuScreen = document.querySelector("#menuScreen");
+const body = document.querySelector("#body");
 
 // 40 letters in total 
 const width = 8;
 const height = 5;
+let optionSelected;
 
-// const startPositionKoreanCharacters = [
-//     gk, rl, dt, n, m, bp, st, ng,
-//     gk, rl, dt, n, m, bp, st, ng,
-//     gk, rl, dt, n, m, bp, st, ng,
-//     gk, rl, dt, n, m, bp, st, ng,
-//     gk, rl, dt, n, m, bp, st, ng,
-// ];
+// if optionselected not equal to null then
 
-// const startPositionKoreanRomanji = [
-//     gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
-//     gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
-//     gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
-//     gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
-//     gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
-// ];
+function createGameBoard() {
+    const gameBoard = document.createElement('div');
+    gameBoard.classList.add('id', 'gameboard');
+    const header = document.createElement('div');
+    header.classList.add('id', 'header');
+    header.innerHTML = "한글 Matching";
+    gameBoard.append(header);
+    const filterSection = document.createElement('div');
+    filterSection.classList.add('id', 'filterSection');
+    gameBoard.append(filterSection);
+    const topBoard = document.createElement('div');
+    filterSection.classList.add('id', 'topBoard');
+    gameBoard.append(topBoard);
+    const bottomBoard = document.createElement('div');
+    filterSection.classList.add('id', 'bottomBoard');
+    gameBoard.append(bottomBoard);
 
+    const gameTopBoard = document.querySelector("#topBoard");
+    const gameBottomBoard = document.querySelector("#bottomBoard");
+}
+
+let romanjiOptions = [
+    "Initial",
+    "Final",
+    "Both"
+]
+
+romanjiOptions.forEach((option) => {
+    const button = document.createElement('button');
+    button.classList.add('options');
+    button.innerHTML = option;
+    menuScreen.append(button);
+})
+
+const menuOptions = document.querySelectorAll("#menuScreen .options");
+
+menuOptions.forEach(block => {
+    block.addEventListener('click', startGame);
+});
+
+function startGame(e) {
+    optionSelected = false;
+    optionSelected = e.target.innerHTML
+    menuScreen.remove();
+    createGameBoard();
+    createTopBoard();
+    createBottomBoard();
+
+    const allBlocks = document.querySelectorAll("#gameboard .block");
+
+    allBlocks.forEach(block => {
+        block.addEventListener('dragstart', dragStart);
+        block.addEventListener('dragover', dragOver);
+        block.addEventListener('drop', dragDrop);
+    });
+
+    // body.prepend(menuScreen);
+}
 
 const filterOptions = [
-    "Consonant",
+    "Plain Consonant",
     "Tense Consonant",
-    "Aspirated Cosonant",
-    "Vowels",
-    "Y Vowels",
-    "W Vowels",
-    "Diphthongs"
+    "Aspirated Consonant",
+    "Vowel",
+    "Y Vowel",
+    "Diphthong"
 ]
 
 function filtering(options) {
+    const filterSection = document.querySelector("#filterSection");
     options.forEach((filterOption) => {
         const filter = document.createElement('div');
         filter.innerHTML = filterOption;
@@ -56,10 +100,8 @@ allFilters.forEach(filter => {
 });
 
 function clickFilter(e) {
-    console.log(e.target);
     const type = e.target.getAttribute('filtertype');
     const string = "[type=\"" + type + "\"]";
-    console.log(string);
     if (e.target.getAttribute('filteron') === "false") {
         e.target.setAttribute('filteron', true);
         const result = document.querySelectorAll(string);
@@ -77,72 +119,72 @@ function clickFilter(e) {
     }
 }
 
-// let startPositionKoreanCharacters2 = new Map([]);
-
-// function randomizeArray(set) {
-//     let items = AlphabetHangul.size;
-//     let count;
-//     items.forEach(() => {
-//         count = Math.floor(Math.random() * items);
-//         console.log("current count", count);
-//         console.log("start position: ", startPositionKoreanCharacters2);
-//         console.log("items ! ", items);
-//         startPositionKoreanCharacters2.push(items[count]);
-//         delete items[count];
-//     })
-//     return startPositionKoreanCharacters2;
-// }
-
-// console.log(randomizeArray(AlphabetHangul));
-// console.log(startPositionKoreanCharacters2);
-
-// you have a list of hash values 
-// for each value 
-
-
-
 function createBottomBoard() {
-    Alphabet.forEach((romanjiLetter, i) => {
-        const { romanjiBothLetter } = romanjiLetter;
-        const block = document.createElement('div');
-        block.classList.add('block');
-        block.classList.add('romanji');
-        if (romanjiBothLetter != undefined) { block.innerHTML = romanjiBothLetter; }
-        block.setAttribute('block-id', i);
-        block.setAttribute('draggable', true);
-        gameBottomBoard.append(block)
-    });
+    switch (optionSelected) {
+        case 'Initial':
+            Alphabet.forEach((romanjiLetter) => {
+                const { romanjiInitialLetter, romanji } = romanjiLetter;
+                const block = document.createElement('div');
+                block.classList.add('block');
+                block.classList.add('romanji');
+                if (romanjiInitialLetter != undefined) { block.innerHTML = romanjiInitialLetter; }
+                block.setAttribute('draggable', true);
+                block.setAttribute('id', romanji);
+                gameBottomBoard.append(block);
+            });
+            break;
+        case 'Final':
+            Alphabet.forEach((romanjiLetter) => {
+                const { romanjiFinalLetter, romanji } = romanjiLetter;
+                const block = document.createElement('div');
+                block.classList.add('block');
+                block.classList.add('romanji');
+                if (romanjiFinalLetter != undefined) { block.innerHTML = romanjiFinalLetter; }
+                block.setAttribute('draggable', true);
+                if (optionSelected === "Final" && romanji.includes('t')) {
+                    block.setAttribute('id', "t");
+                } else {
+                    block.setAttribute('id', romanji);
+                }
+                gameBottomBoard.append(block);
+            });
+            break;
+        default:
+            Alphabet.forEach((romanjiLetter) => {
+                const { romanjiBothLetter, romanji } = romanjiLetter;
+                const block = document.createElement('div');
+                block.classList.add('block');
+                block.classList.add('romanji');
+                if (romanjiBothLetter != undefined) { block.innerHTML = romanjiBothLetter; }
+                block.setAttribute('draggable', true);
+                block.setAttribute('id', romanji);
+                gameBottomBoard.append(block);
+            });
+    }
 }
 
 function createTopBoard() {
-    Alphabet.forEach((hangulLetter, i) => {
-        const { hangulLetterElement } = hangulLetter;
+    Alphabet.forEach((hangulLetter) => {
+        const { hangulLetterElement, classification, romanji } = hangulLetter;
         const block = document.createElement('div');
         block.classList.add('block');
         block.classList.add('hangul');
+        if (optionSelected === "Final" && romanji.includes('t')) {
+            block.setAttribute('answer', "t");
+        } else {
+            block.setAttribute('answer', romanji);
+        }
         if (hangulLetterElement != undefined) { block.innerHTML = hangulLetterElement; }
-        block.setAttribute('block-id', i);
+        if (classification != null) { block.setAttribute('type', classification) };
+        block.setAttribute('id', romanji);
         gameTopBoard.append(block);
     })
 }
-
-createTopBoard();
-createBottomBoard();
-
-const allBlocks = document.querySelectorAll("#gameboard .block");
-
-allBlocks.forEach(block => {
-    block.addEventListener('dragstart', dragStart);
-    block.addEventListener('dragover', dragOver);
-    block.addEventListener('drop', dragDrop);
-});
-
 let dragStartPosition;
 let draggedElement;
 
 function dragStart(e) {
     dragStartPosition = e.target.parentNode.getAttribute('block-id');
-    // dragStartPosition = e.target.firstChild.getAttribute('id');
     draggedElement = e.target.firstChild;
 }
 
@@ -152,11 +194,9 @@ function dragOver(e) {
 
 function dragDrop(e) {
     e.stopPropagation();
-    let draggedId = draggedElement.getAttribute('id');
-
-    let targetAnswer = e.target.getAttribute('answer');
-    console.log(draggedElement);
-    if (e.target.parentNode.classList.contains('romanji') && (draggedId === targetAnswer)) {
+    let draggedId = draggedElement.parentNode.getAttribute('id');
+    let targetAnswer = e.target.parentNode.getAttribute('answer');
+    if (e.target.parentNode.classList.contains('hangul') && (draggedId === targetAnswer)) {
         e.target.parentNode.append(draggedElement);
         e.target.remove();
     }
