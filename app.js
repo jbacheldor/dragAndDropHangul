@@ -6,21 +6,21 @@ const filterSection = document.querySelector("#filterSection");
 const width = 8;
 const height = 5;
 
-const startPositionKoreanCharacters = [
-    gk, rl, dt, n, m, bp, st, ng,
-    gk, rl, dt, n, m, bp, st, ng,
-    gk, rl, dt, n, m, bp, st, ng,
-    gk, rl, dt, n, m, bp, st, ng,
-    gk, rl, dt, n, m, bp, st, ng,
-];
+// const startPositionKoreanCharacters = [
+//     gk, rl, dt, n, m, bp, st, ng,
+//     gk, rl, dt, n, m, bp, st, ng,
+//     gk, rl, dt, n, m, bp, st, ng,
+//     gk, rl, dt, n, m, bp, st, ng,
+//     gk, rl, dt, n, m, bp, st, ng,
+// ];
 
-const startPositionKoreanRomanji = [
-    gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
-    gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
-    gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
-    gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
-    gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
-];
+// const startPositionKoreanRomanji = [
+//     gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
+//     gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
+//     gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
+//     gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
+//     gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
+// ];
 
 
 const filterOptions = [
@@ -102,48 +102,28 @@ function clickFilter(e) {
 
 
 function createBottomBoard() {
-    AlphabetRomanjiLetters.forEach((romanjiLetter, i) => {
-        const { picture } = romanjiLetter;
+    Alphabet.forEach((romanjiLetter, i) => {
+        const { romanjiBothLetter } = romanjiLetter;
         const block = document.createElement('div');
         block.classList.add('block');
         block.classList.add('romanji');
-        if (picture != undefined) { block.innerHTML = picture; }
+        if (romanjiBothLetter != undefined) { block.innerHTML = romanjiBothLetter; }
         block.setAttribute('block-id', i);
+        block.setAttribute('draggable', true);
         gameBottomBoard.append(block)
     });
-    // startPositionKoreanRomanji.forEach((letter, i) => {
-    //     const { picture } = letter
-    //     const block = document.createElement('div');
-    //     block.classList.add('block');
-    //     block.classList.add('romanji');
-    //     if (picture != undefined) { block.innerHTML = picture; }
-    //     block.setAttribute('block-id', i);
-    //     gameTopBoard.append(block);
-    // })
 }
 
 function createTopBoard() {
-
-    AlphabetHangulLetters.forEach((hangulLetter, i) => {
-            const { picture } = hangulLetter;
-            const block = document.createElement('div');
-            block.classList.add('block');
-            block.classList.add('hangul');
-            if (picture != undefined) { block.innerHTML = picture; }
-            block.setAttribute('block-id', i);
-            block.setAttribute('draggable', true);
-            gameTopBoard.append(block);
-        })
-        // startPositionKoreanCharacters.forEach((letter, i) => {
-        //     const { picture } = letter;
-        //     const block = document.createElement('div');
-        //     block.classList.add('block');
-        //     block.classList.add('hangul');
-        //     if (picture != undefined) { block.innerHTML = picture; }
-        //     block.setAttribute('block-id', i);
-        //     block.setAttribute('draggable', true);
-        //     gameBottomBoard.append(block);
-        // })
+    Alphabet.forEach((hangulLetter, i) => {
+        const { hangulLetterElement } = hangulLetter;
+        const block = document.createElement('div');
+        block.classList.add('block');
+        block.classList.add('hangul');
+        if (hangulLetterElement != undefined) { block.innerHTML = hangulLetterElement; }
+        block.setAttribute('block-id', i);
+        gameTopBoard.append(block);
+    })
 }
 
 createTopBoard();

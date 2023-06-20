@@ -93,4 +93,6 @@ div[draggable="true"] {
     display: flex;
     justify-content: center;
     background-color: rgba(43, 43, 43, 0.213);
+    padding: 10px;
+    font-size: 20px;
 }
