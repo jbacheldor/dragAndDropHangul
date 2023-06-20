@@ -1,7 +1,4 @@
 const menuScreen = document.querySelector("#menuScreen");
-const gameTopBoard = document.querySelector("#topBoard");
-const gameBottomBoard = document.querySelector("#bottomBoard");
-const filterSection = document.querySelector("#filterSection");
 const body = document.querySelector("#body");
 
 // 40 letters in total 
@@ -9,6 +6,28 @@ const width = 8;
 const height = 5;
 let optionSelected;
 
+// if optionselected not equal to null then
+
+function createGameBoard() {
+    const gameBoard = document.createElement('div');
+    gameBoard.classList.add('id', 'gameboard');
+    const header = document.createElement('div');
+    header.classList.add('id', 'header');
+    header.innerHTML = "한글 Matching";
+    gameBoard.append(header);
+    const filterSection = document.createElement('div');
+    filterSection.classList.add('id', 'filterSection');
+    gameBoard.append(filterSection);
+    const topBoard = document.createElement('div');
+    filterSection.classList.add('id', 'topBoard');
+    gameBoard.append(topBoard);
+    const bottomBoard = document.createElement('div');
+    filterSection.classList.add('id', 'bottomBoard');
+    gameBoard.append(bottomBoard);
+
+    const gameTopBoard = document.querySelector("#topBoard");
+    const gameBottomBoard = document.querySelector("#bottomBoard");
+}
 
 let romanjiOptions = [
     "Initial",
@@ -32,6 +51,8 @@ menuOptions.forEach(block => {
 function startGame(e) {
     optionSelected = false;
     optionSelected = e.target.innerHTML
+    menuScreen.remove();
+    createGameBoard();
     createTopBoard();
     createBottomBoard();
 
@@ -43,8 +64,7 @@ function startGame(e) {
         block.addEventListener('drop', dragDrop);
     });
 
-    menuScreen.remove();
-    body.prepend(menuScreen);
+    // body.prepend(menuScreen);
 }
 
 const filterOptions = [
@@ -57,6 +77,7 @@ const filterOptions = [
 ]
 
 function filtering(options) {
+    const filterSection = document.querySelector("#filterSection");
     options.forEach((filterOption) => {
         const filter = document.createElement('div');
         filter.innerHTML = filterOption;
@@ -143,8 +164,6 @@ function createBottomBoard() {
 }
 
 function createTopBoard() {
-    // if create board option is final character
-    // then if the romanji contains "t" change the answer to "t"
     Alphabet.forEach((hangulLetter) => {
         const { hangulLetterElement, classification, romanji } = hangulLetter;
         const block = document.createElement('div');
@@ -176,9 +195,7 @@ function dragOver(e) {
 function dragDrop(e) {
     e.stopPropagation();
     let draggedId = draggedElement.parentNode.getAttribute('id');
-    console.log(draggedId);
     let targetAnswer = e.target.parentNode.getAttribute('answer');
-    console.log(targetAnswer);
     if (e.target.parentNode.classList.contains('hangul') && (draggedId === targetAnswer)) {
         e.target.parentNode.append(draggedElement);
         e.target.remove();
