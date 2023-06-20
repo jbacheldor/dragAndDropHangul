@@ -88,6 +88,35 @@ div[draggable="true"] {
     font-size: 20px;
 }
 
-.menuScreen {
-    background-color: rgb(4, 169, 64);
+#menuScreen {
+    background-color:rgba(43, 43, 43, 0.213);
+    height: 750px;
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#footer {
+    background-color: rgba(43, 43, 43, 0.213);
+    height: 60px;
+    width: inherit;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.options {
+    background-color: aliceblue;
+    margin: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.footerIcon {
+    cursor: pointer;
 }

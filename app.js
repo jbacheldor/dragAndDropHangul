@@ -1,33 +1,75 @@
 const menuScreen = document.querySelector("#menuScreen");
 const body = document.querySelector("#body");
+const gameTopBoard = document.querySelector("#topBoard");
+const gameBottomBoard = document.querySelector("#bottomBoard");
+const gameBoard = document.querySelector("#gameboard");
 
 // 40 letters in total 
 const width = 8;
 const height = 5;
 let optionSelected;
 
-// if optionselected not equal to null then
-
+// is it good to create this each time? or can we just store the element 
 function createGameBoard() {
+    // body.append(gameBoard);
+
     const gameBoard = document.createElement('div');
-    gameBoard.classList.add('id', 'gameboard');
+    gameBoard.setAttribute('id', 'gameboard');
+    body.append(gameBoard);
     const header = document.createElement('div');
-    header.classList.add('id', 'header');
+    header.setAttribute('id', 'header');
     header.innerHTML = "한글 Matching";
     gameBoard.append(header);
     const filterSection = document.createElement('div');
-    filterSection.classList.add('id', 'filterSection');
+    filterSection.setAttribute('id', 'filterSection');
     gameBoard.append(filterSection);
+    // create 
     const topBoard = document.createElement('div');
-    filterSection.classList.add('id', 'topBoard');
+    topBoard.setAttribute('id', 'topBoard');
     gameBoard.append(topBoard);
+    // create the bottom
     const bottomBoard = document.createElement('div');
-    filterSection.classList.add('id', 'bottomBoard');
+    bottomBoard.setAttribute('id', 'bottomBoard');
     gameBoard.append(bottomBoard);
+    // create the footer
+    const footer = document.createElement('div');
+    footer.setAttribute('id', 'footer');
+    document.createElement('div');
 
-    const gameTopBoard = document.querySelector("#topBoard");
-    const gameBottomBoard = document.querySelector("#bottomBoard");
+    Icons.forEach((icons)=> {
+        const { iconElement } = icons;
+        const icon = document.createElement('div');
+        icon.innerHTML = iconElement;
+        icon.classList.add('footerIcon');
+        footer.append(icon);
+    })
+
+    gameBoard.append(footer);
+    const footerIcons = document.querySelectorAll("#footer .footerIcon");
+    footerIcons.forEach(icon => {
+        icon.addEventListener('click', iconClick);
+    })
 }
+
+// this is currently breaking - need to find a way to add and remove screens - building them up must be time consuming
+function iconClick(e) {
+    switch(e.target.parentNode.parentNode.getAttribute('id')){
+        case 'homeButton':
+            const gameBoard = document.querySelector("#gameboard");
+            body.remove(gameBoard);
+            const menuScreen = document.querySelector("#menuScreen");
+            body.append(menuScreen);
+            break;
+        case 'backgroundMusic':
+            console.log("clicky");
+            break;
+        case 'noMusic':
+            console.log("clicky");
+            break;
+        case 'music':
+            console.log("clicky");
+            break;   
+}}
 
 let romanjiOptions = [
     "Initial",
@@ -36,7 +78,7 @@ let romanjiOptions = [
 ]
 
 romanjiOptions.forEach((option) => {
-    const button = document.createElement('button');
+    const button = document.createElement('div');
     button.classList.add('options');
     button.innerHTML = option;
     menuScreen.append(button);
@@ -64,6 +106,13 @@ function startGame(e) {
         block.addEventListener('drop', dragDrop);
     });
 
+    filtering(filterOptions);
+
+    const allFilters = document.querySelectorAll("#gameboard .filter");
+
+    allFilters.forEach(filter => {
+        filter.addEventListener('click', clickFilter);
+    });
     // body.prepend(menuScreen);
 }
 
@@ -88,16 +137,6 @@ function filtering(options) {
     })
 }
 
-filtering(filterOptions);
-
-const allFilters = document.querySelectorAll("#gameboard .filter");
-
-const allHangulCharacters = document.querySelectorAll("#gameboard .hangul");
-const allRomanjiCharacters = document.querySelectorAll("#gameboard .romanji");
-
-allFilters.forEach(filter => {
-    filter.addEventListener('click', clickFilter);
-});
 
 function clickFilter(e) {
     const type = e.target.getAttribute('filtertype');
@@ -119,11 +158,31 @@ function clickFilter(e) {
     }
 }
 
+function randomizeElements() {
+    let alphabetArray = Array.from(Alphabet, ([name, value]) => ({ name, value }));
+
+    let currentIndex = alphabetArray.length,  randomIndex;
+    while (currentIndex != 0) {
+
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+    
+        // And swap it with the current element.
+        [alphabetArray[currentIndex], alphabetArray[randomIndex]] = [
+            alphabetArray[randomIndex], alphabetArray[currentIndex]];
+      }
+
+      return alphabetArray;
+}
+
 function createBottomBoard() {
+    const gameBottomBoard = document.querySelector("#bottomBoard");
+    let randomLetters = randomizeElements(Alphabet);
     switch (optionSelected) {
         case 'Initial':
-            Alphabet.forEach((romanjiLetter) => {
-                const { romanjiInitialLetter, romanji } = romanjiLetter;
+            randomLetters.forEach((romanjiLetter, i) => {
+                const { romanjiInitialLetter, romanji } = randomLetters[i].value;
                 const block = document.createElement('div');
                 block.classList.add('block');
                 block.classList.add('romanji');
@@ -134,8 +193,8 @@ function createBottomBoard() {
             });
             break;
         case 'Final':
-            Alphabet.forEach((romanjiLetter) => {
-                const { romanjiFinalLetter, romanji } = romanjiLetter;
+            randomLetters.forEach((romanjiLetter, i) => {
+                const { romanjiFinalLetter, romanji } = randomLetters[i].value;
                 const block = document.createElement('div');
                 block.classList.add('block');
                 block.classList.add('romanji');
@@ -150,8 +209,8 @@ function createBottomBoard() {
             });
             break;
         default:
-            Alphabet.forEach((romanjiLetter) => {
-                const { romanjiBothLetter, romanji } = romanjiLetter;
+            randomLetters.forEach((romanjiLetter, i) => {
+                const { romanjiBothLetter, romanji } = randomLetters[i].value;
                 const block = document.createElement('div');
                 block.classList.add('block');
                 block.classList.add('romanji');
@@ -164,6 +223,7 @@ function createBottomBoard() {
 }
 
 function createTopBoard() {
+    const gameTopBoard = document.querySelector("#topBoard");
     Alphabet.forEach((hangulLetter) => {
         const { hangulLetterElement, classification, romanji } = hangulLetter;
         const block = document.createElement('div');
