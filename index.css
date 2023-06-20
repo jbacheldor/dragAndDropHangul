@@ -22,15 +22,6 @@ body {
     z-index: 2;
 }
 
-
-/* .block svg {
-    height: 30px;
-    width: 30px;
-    margin: 5px;
-    position: relative;
-    z-index: -13;
-} */
-
 path {
     position: relative;
     z-index: -14;
@@ -57,14 +48,14 @@ path {
 
 .filter {
     height: 40px;
-    width: 52px;
+    width: 62px;
     margin: 5px;
-    font-size: 10px;
+    font-size: 12px;
     background-color: gainsboro;
     display: flex;
+    text-align: center;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
     cursor: pointer;
 }
 
@@ -95,4 +86,37 @@ div[draggable="true"] {
     background-color: rgba(43, 43, 43, 0.213);
     padding: 10px;
     font-size: 20px;
+}
+
+#menuScreen {
+    background-color:rgba(43, 43, 43, 0.213);
+    height: 750px;
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#footer {
+    background-color: rgba(43, 43, 43, 0.213);
+    height: 60px;
+    width: inherit;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.options {
+    background-color: aliceblue;
+    margin: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.footerIcon {
+    cursor: pointer;
 }
