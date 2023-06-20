@@ -34,6 +34,15 @@ function startGame(e) {
     optionSelected = e.target.innerHTML
     createTopBoard();
     createBottomBoard();
+
+    const allBlocks = document.querySelectorAll("#gameboard .block");
+
+    allBlocks.forEach(block => {
+        block.addEventListener('dragstart', dragStart);
+        block.addEventListener('dragover', dragOver);
+        block.addEventListener('drop', dragDrop);
+    });
+
     menuScreen.remove();
     body.prepend(menuScreen);
 }
@@ -89,30 +98,6 @@ function clickFilter(e) {
     }
 }
 
-// let startPositionKoreanCharacters2 = new Map([]);
-
-// function randomizeArray(set) {
-//     let items = AlphabetHangul.size;
-//     let count;
-//     items.forEach(() => {
-//         count = Math.floor(Math.random() * items);
-//         console.log("current count", count);
-//         console.log("start position: ", startPositionKoreanCharacters2);
-//         console.log("items ! ", items);
-//         startPositionKoreanCharacters2.push(items[count]);
-//         delete items[count];
-//     })
-//     return startPositionKoreanCharacters2;
-// }
-
-// console.log(randomizeArray(AlphabetHangul));
-// console.log(startPositionKoreanCharacters2);
-
-// you have a list of hash values 
-// for each value 
-
-
-
 function createBottomBoard() {
     switch (optionSelected) {
         case 'Initial':
@@ -135,7 +120,11 @@ function createBottomBoard() {
                 block.classList.add('romanji');
                 if (romanjiFinalLetter != undefined) { block.innerHTML = romanjiFinalLetter; }
                 block.setAttribute('draggable', true);
-                block.setAttribute('id', romanji);
+                if (optionSelected === "Final" && romanji.includes('t')) {
+                    block.setAttribute('id', "t");
+                } else {
+                    block.setAttribute('id', romanji);
+                }
                 gameBottomBoard.append(block);
             });
             break;
@@ -172,15 +161,6 @@ function createTopBoard() {
         gameTopBoard.append(block);
     })
 }
-
-const allBlocks = document.querySelectorAll("#gameboard .block");
-
-allBlocks.forEach(block => {
-    block.addEventListener('dragstart', dragStart);
-    block.addEventListener('dragover', dragOver);
-    block.addEventListener('drop', dragDrop);
-});
-
 let dragStartPosition;
 let draggedElement;
 
