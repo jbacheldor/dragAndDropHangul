@@ -4,6 +4,13 @@ Pulled info from:
 https://www.90daykorean.com/how-to-learn-the-korean-alphabet/
 & duolingos grammar categories
 
+Music from:
+Morning Routine by Ghostrifter Official | https://soundcloud.com/ghostrifter-official
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
+ 
+
 Icons used in early testing from:
 fontawesome.com
 
