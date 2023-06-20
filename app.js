@@ -6,31 +6,13 @@ const filterSection = document.querySelector("#filterSection");
 const width = 8;
 const height = 5;
 
-// const startPositionKoreanCharacters = [
-//     gk, rl, dt, n, m, bp, st, ng,
-//     gk, rl, dt, n, m, bp, st, ng,
-//     gk, rl, dt, n, m, bp, st, ng,
-//     gk, rl, dt, n, m, bp, st, ng,
-//     gk, rl, dt, n, m, bp, st, ng,
-// ];
-
-// const startPositionKoreanRomanji = [
-//     gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
-//     gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
-//     gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
-//     gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
-//     gkHangul, rlHangul, dtHangul, nHangul, mHangul, bpHangul, stHangul, ngHangul,
-// ];
-
-
 const filterOptions = [
-    "Consonant",
+    "Plain Consonant",
     "Tense Consonant",
-    "Aspirated Cosonant",
-    "Vowels",
-    "Y Vowels",
-    "W Vowels",
-    "Diphthongs"
+    "Aspirated Consonant",
+    "Vowel",
+    "Y Vowel",
+    "Diphthong"
 ]
 
 function filtering(options) {
