@@ -1,3 +1,4 @@
+const menuScreen = document.querySelector("#menuScreen");
 const gameTopBoard = document.querySelector("#topBoard");
 const gameBottomBoard = document.querySelector("#bottomBoard");
 const filterSection = document.querySelector("#filterSection");
@@ -5,6 +6,40 @@ const filterSection = document.querySelector("#filterSection");
 // 40 letters in total 
 const width = 8;
 const height = 5;
+let optionSelected = false;
+
+let romanjiOptions = [
+    "Initial",
+    "Final",
+    "Both"
+]
+
+romanjiOptions.forEach((option) => {
+    const button = document.createElement('button');
+    button.classList.add('options');
+    button.innerHTML = option;
+    menuScreen.append(button);
+})
+
+const menuOptions = document.querySelectorAll("#menuScreen .options");
+
+menuOptions.forEach(block => {
+    block.addEventListener('click', startGame);
+});
+
+function startGame(e) {
+    optionSelected = false;
+    switch (e.target.innerHTML) {
+        case 'Both':
+            break;
+        case 'Final':
+            break;
+        case 'Initial':
+            break;
+
+    }
+    menuScreen.remove();
+}
 
 const filterOptions = [
     "Plain Consonant",
@@ -38,10 +73,8 @@ allFilters.forEach(filter => {
 });
 
 function clickFilter(e) {
-    console.log(e.target);
     const type = e.target.getAttribute('filtertype');
     const string = "[type=\"" + type + "\"]";
-    console.log(string);
     if (e.target.getAttribute('filteron') === "false") {
         e.target.setAttribute('filteron', true);
         const result = document.querySelectorAll(string);
@@ -84,26 +117,30 @@ function clickFilter(e) {
 
 
 function createBottomBoard() {
-    Alphabet.forEach((romanjiLetter, i) => {
-        const { romanjiBothLetter } = romanjiLetter;
+    Alphabet.forEach((romanjiLetter) => {
+        const { romanjiFinalLetter, romanji } = romanjiLetter;
         const block = document.createElement('div');
         block.classList.add('block');
         block.classList.add('romanji');
-        if (romanjiBothLetter != undefined) { block.innerHTML = romanjiBothLetter; }
-        block.setAttribute('block-id', i);
+        if (romanjiFinalLetter != undefined) { block.innerHTML = romanjiFinalLetter; }
         block.setAttribute('draggable', true);
+        block.setAttribute('id', romanji);
         gameBottomBoard.append(block)
     });
 }
 
 function createTopBoard() {
-    Alphabet.forEach((hangulLetter, i) => {
-        const { hangulLetterElement } = hangulLetter;
+    // if create board option is final character
+    // then if the romanji contains "t" change the answer to "t"
+    Alphabet.forEach((hangulLetter) => {
+        const { hangulLetterElement, classification, romanji } = hangulLetter;
         const block = document.createElement('div');
         block.classList.add('block');
         block.classList.add('hangul');
         if (hangulLetterElement != undefined) { block.innerHTML = hangulLetterElement; }
-        block.setAttribute('block-id', i);
+        if (classification != null) { block.setAttribute('type', classification) };
+        if (romanji != null) { block.setAttribute('answer', romanji) };
+        block.setAttribute('id', romanji);
         gameTopBoard.append(block);
     })
 }
@@ -124,7 +161,6 @@ let draggedElement;
 
 function dragStart(e) {
     dragStartPosition = e.target.parentNode.getAttribute('block-id');
-    // dragStartPosition = e.target.firstChild.getAttribute('id');
     draggedElement = e.target.firstChild;
 }
 
@@ -134,11 +170,11 @@ function dragOver(e) {
 
 function dragDrop(e) {
     e.stopPropagation();
-    let draggedId = draggedElement.getAttribute('id');
-
-    let targetAnswer = e.target.getAttribute('answer');
-    console.log(draggedElement);
-    if (e.target.parentNode.classList.contains('romanji') && (draggedId === targetAnswer)) {
+    let draggedId = draggedElement.parentNode.getAttribute('id');
+    console.log(draggedId);
+    let targetAnswer = e.target.parentNode.getAttribute('answer');
+    console.log(targetAnswer);
+    if (e.target.parentNode.classList.contains('hangul') && (draggedId === targetAnswer)) {
         e.target.parentNode.append(draggedElement);
         e.target.remove();
     }
