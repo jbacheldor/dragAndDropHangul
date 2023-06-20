@@ -2,11 +2,13 @@ const menuScreen = document.querySelector("#menuScreen");
 const gameTopBoard = document.querySelector("#topBoard");
 const gameBottomBoard = document.querySelector("#bottomBoard");
 const filterSection = document.querySelector("#filterSection");
+const body = document.querySelector("#body");
 
 // 40 letters in total 
 const width = 8;
 const height = 5;
-let optionSelected = false;
+let optionSelected;
+
 
 let romanjiOptions = [
     "Initial",
@@ -29,16 +31,11 @@ menuOptions.forEach(block => {
 
 function startGame(e) {
     optionSelected = false;
-    switch (e.target.innerHTML) {
-        case 'Both':
-            break;
-        case 'Final':
-            break;
-        case 'Initial':
-            break;
-
-    }
+    optionSelected = e.target.innerHTML
+    createTopBoard();
+    createBottomBoard();
     menuScreen.remove();
+    body.prepend(menuScreen);
 }
 
 const filterOptions = [
@@ -117,16 +114,43 @@ function clickFilter(e) {
 
 
 function createBottomBoard() {
-    Alphabet.forEach((romanjiLetter) => {
-        const { romanjiFinalLetter, romanji } = romanjiLetter;
-        const block = document.createElement('div');
-        block.classList.add('block');
-        block.classList.add('romanji');
-        if (romanjiFinalLetter != undefined) { block.innerHTML = romanjiFinalLetter; }
-        block.setAttribute('draggable', true);
-        block.setAttribute('id', romanji);
-        gameBottomBoard.append(block)
-    });
+    switch (optionSelected) {
+        case 'Initial':
+            Alphabet.forEach((romanjiLetter) => {
+                const { romanjiInitialLetter, romanji } = romanjiLetter;
+                const block = document.createElement('div');
+                block.classList.add('block');
+                block.classList.add('romanji');
+                if (romanjiInitialLetter != undefined) { block.innerHTML = romanjiInitialLetter; }
+                block.setAttribute('draggable', true);
+                block.setAttribute('id', romanji);
+                gameBottomBoard.append(block);
+            });
+            break;
+        case 'Final':
+            Alphabet.forEach((romanjiLetter) => {
+                const { romanjiFinalLetter, romanji } = romanjiLetter;
+                const block = document.createElement('div');
+                block.classList.add('block');
+                block.classList.add('romanji');
+                if (romanjiFinalLetter != undefined) { block.innerHTML = romanjiFinalLetter; }
+                block.setAttribute('draggable', true);
+                block.setAttribute('id', romanji);
+                gameBottomBoard.append(block);
+            });
+            break;
+        default:
+            Alphabet.forEach((romanjiLetter) => {
+                const { romanjiBothLetter, romanji } = romanjiLetter;
+                const block = document.createElement('div');
+                block.classList.add('block');
+                block.classList.add('romanji');
+                if (romanjiBothLetter != undefined) { block.innerHTML = romanjiBothLetter; }
+                block.setAttribute('draggable', true);
+                block.setAttribute('id', romanji);
+                gameBottomBoard.append(block);
+            });
+    }
 }
 
 function createTopBoard() {
@@ -137,16 +161,17 @@ function createTopBoard() {
         const block = document.createElement('div');
         block.classList.add('block');
         block.classList.add('hangul');
+        if (optionSelected === "Final" && romanji.includes('t')) {
+            block.setAttribute('answer', "t");
+        } else {
+            block.setAttribute('answer', romanji);
+        }
         if (hangulLetterElement != undefined) { block.innerHTML = hangulLetterElement; }
         if (classification != null) { block.setAttribute('type', classification) };
-        if (romanji != null) { block.setAttribute('answer', romanji) };
         block.setAttribute('id', romanji);
         gameTopBoard.append(block);
     })
 }
-
-createTopBoard();
-createBottomBoard();
 
 const allBlocks = document.querySelectorAll("#gameboard .block");
 
