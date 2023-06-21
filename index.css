@@ -121,3 +121,8 @@ div[draggable="true"] {
     cursor: pointer;
     padding: 10px;
 }
+
+.resetButton {
+    color: black;
+    font-size: 20px;
+}

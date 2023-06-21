@@ -113,15 +113,21 @@ function iconClick(e) {
             clickBody.removeChild(gameBoard);
             body.append(menuScreen);
             break;
+        case 'resetButton':
+            console.log('hitting here');
+            resetBottomBoard();
+            break;
         case 'backgroundMusic':
             console.log("clicky");
             break;
         case 'noMusic':
             console.log("clicky");
             break;
-        case 'music':
+        case 'Music':
             console.log("clicky");
             break;
+        default:
+            console.log((e.target.parentNode.parentNode.getAttribute('id')));
     }
 }
 
