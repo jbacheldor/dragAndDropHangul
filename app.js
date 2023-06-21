@@ -1,8 +1,8 @@
 const menuScreen = document.querySelector("#menuScreen");
 const body = document.querySelector("#body");
-const gameTopBoard = document.querySelector("#topBoard");
-const gameBottomBoard = document.querySelector("#bottomBoard");
-const gameBoard = document.querySelector("#gameboard");
+let gameTopBoard;
+let gameBottomBoard;
+let gameBoardElement;
 
 // 40 letters in total 
 const width = 8;
@@ -10,54 +10,85 @@ const height = 5;
 let optionSelected;
 
 // is it good to create this each time? or can we just store the element 
-function createGameBoard() {
-    // body.append(gameBoard);
+function createGameBoard(input) {
+    if (gameBoardElement === null || gameBoardElement === undefined) {
+        console.log("hitting here");
+        const gameBoard = document.createElement('div');
+        gameBoard.setAttribute('id', 'gameboard');
+        body.append(gameBoard);
+        const header = document.createElement('div');
+        header.setAttribute('id', 'header');
+        header.innerHTML = "한글 Matching: " + input;
+        gameBoard.append(header);
+        const filterSection = document.createElement('div');
+        filterSection.setAttribute('id', 'filterSection');
+        gameBoard.append(filterSection);
+        // create 
+        const topBoard = document.createElement('div');
+        topBoard.setAttribute('id', 'topBoard');
+        gameBoard.append(topBoard);
+        // create the bottom
+        const bottomBoard = document.createElement('div');
+        bottomBoard.setAttribute('id', 'bottomBoard');
+        gameBoard.append(bottomBoard);
+        // create the footer
+        const footer = document.createElement('div');
+        footer.setAttribute('id', 'footer');
+        document.createElement('div');
 
-    const gameBoard = document.createElement('div');
-    gameBoard.setAttribute('id', 'gameboard');
-    body.append(gameBoard);
-    const header = document.createElement('div');
-    header.setAttribute('id', 'header');
-    header.innerHTML = "한글 Matching";
-    gameBoard.append(header);
-    const filterSection = document.createElement('div');
-    filterSection.setAttribute('id', 'filterSection');
-    gameBoard.append(filterSection);
-    // create 
-    const topBoard = document.createElement('div');
-    topBoard.setAttribute('id', 'topBoard');
-    gameBoard.append(topBoard);
-    // create the bottom
-    const bottomBoard = document.createElement('div');
-    bottomBoard.setAttribute('id', 'bottomBoard');
-    gameBoard.append(bottomBoard);
-    // create the footer
-    const footer = document.createElement('div');
-    footer.setAttribute('id', 'footer');
-    document.createElement('div');
+        Icons.forEach((icons) => {
+            const { iconElement } = icons;
+            const icon = document.createElement('div');
+            icon.innerHTML = iconElement;
+            icon.classList.add('footerIcon');
+            footer.append(icon);
+        })
 
-    Icons.forEach((icons)=> {
-        const { iconElement } = icons;
-        const icon = document.createElement('div');
-        icon.innerHTML = iconElement;
-        icon.classList.add('footerIcon');
-        footer.append(icon);
-    })
+        gameBoard.append(footer);
+        const footerIcons = document.querySelectorAll("#footer .footerIcon");
+        footerIcons.forEach(icon => {
+            icon.addEventListener('click', iconClick);
+        })
 
-    gameBoard.append(footer);
-    const footerIcons = document.querySelectorAll("#footer .footerIcon");
-    footerIcons.forEach(icon => {
-        icon.addEventListener('click', iconClick);
-    })
+        gameTopBoard = document.querySelector("#topBoard");
+        gameBottomBoard = document.querySelector("#bottomBoard");
+        gameBoardElement = document.querySelector("#gameboard");
+
+        createTopBoard();
+        createBottomBoard();
+
+        const allBlocks = document.querySelectorAll("#gameboard .block");
+
+        allBlocks.forEach(block => {
+            block.addEventListener('dragstart', dragStart);
+            block.addEventListener('dragover', dragOver);
+            block.addEventListener('drop', dragDrop);
+        });
+
+        filtering(filterOptions);
+
+        const allFilters = document.querySelectorAll("#gameboard .filter");
+
+        allFilters.forEach(filter => {
+            filter.addEventListener('click', clickFilter);
+        });
+
+    } else {
+        // document.appendChild(gameBoardElement);
+        // console.log(body);
+        body.append(gameBoardElement);
+        // gameBoardElement.append(gameTopBoard);
+        // gameBoardElement.append(gameBottomBoard);
+    }
 }
 
 // this is currently breaking - need to find a way to add and remove screens - building them up must be time consuming
 function iconClick(e) {
-    switch(e.target.parentNode.parentNode.getAttribute('id')){
+    switch (e.target.parentNode.parentNode.getAttribute('id')) {
         case 'homeButton':
             const gameBoard = document.querySelector("#gameboard");
-            body.remove(gameBoard);
-            const menuScreen = document.querySelector("#menuScreen");
+            const clickBody = document.querySelector("#body");
+            clickBody.removeChild(gameBoard);
             body.append(menuScreen);
             break;
         case 'backgroundMusic':
@@ -68,8 +99,9 @@ function iconClick(e) {
             break;
         case 'music':
             console.log("clicky");
-            break;   
-}}
+            break;
+    }
+}
 
 let romanjiOptions = [
     "Initial",
@@ -93,27 +125,10 @@ menuOptions.forEach(block => {
 function startGame(e) {
     optionSelected = false;
     optionSelected = e.target.innerHTML
+    console.log(menuScreen);
     menuScreen.remove();
-    createGameBoard();
-    createTopBoard();
-    createBottomBoard();
-
-    const allBlocks = document.querySelectorAll("#gameboard .block");
-
-    allBlocks.forEach(block => {
-        block.addEventListener('dragstart', dragStart);
-        block.addEventListener('dragover', dragOver);
-        block.addEventListener('drop', dragDrop);
-    });
-
-    filtering(filterOptions);
-
-    const allFilters = document.querySelectorAll("#gameboard .filter");
-
-    allFilters.forEach(filter => {
-        filter.addEventListener('click', clickFilter);
-    });
-    // body.prepend(menuScreen);
+    console.log("body is here", document.querySelector("#body"));
+    createGameBoard(e.target.innerHTML);
 }
 
 const filterOptions = [
@@ -161,19 +176,20 @@ function clickFilter(e) {
 function randomizeElements() {
     let alphabetArray = Array.from(Alphabet, ([name, value]) => ({ name, value }));
 
-    let currentIndex = alphabetArray.length,  randomIndex;
+    let currentIndex = alphabetArray.length,
+        randomIndex;
     while (currentIndex != 0) {
-
         // Pick a remaining element.
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
-    
+
         // And swap it with the current element.
         [alphabetArray[currentIndex], alphabetArray[randomIndex]] = [
-            alphabetArray[randomIndex], alphabetArray[currentIndex]];
-      }
+            alphabetArray[randomIndex], alphabetArray[currentIndex]
+        ];
+    }
 
-      return alphabetArray;
+    return alphabetArray;
 }
 
 function createBottomBoard() {
