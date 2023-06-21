@@ -17,21 +17,29 @@ fontawesome.com
 
 to-do:
 
-Decide on mapping:
-- which is best for space and time (does it make a difference here)
-
-Svg actions:
-- make 40 for hangul
-- make 40 for romanji
-
-Filtering:
-- filtering for the different types
-- on click - make icons unclickable or undraggable or grey them out
-
 readiability:
-- break filtering into it's own file
+- try to break elements into their own files
+- look into reset functionality
 
-later on - sound features:
-- if it isn't a match then make a noise
-- if it is a match then make a noise
-- how to bring music in 
+features:
+- add in time clock
+- after the first piece is moved then filtering needs to stop working = no more changes until reset or revert to menu
+- make it so you can't drop into greyed out functionality
+- change it so no matter what browser/size you view it from it shouldn't impact things
+
+
+bugs:
+- figure out what is going on with the footer clicks
+
+small things:
+- remove the character from mapping - not being used
+- change the clickable component in the blocks to be something else - like is active
+- change the icons mapping to not be 3 deep for the reset 
+- the body is weird and not sized properly to match the elements
+- make it so the footer doesn't have to disappear on reset is possible
+- change overall sizing so scroll isn't needed
+
+
+background:
+- home screen
+- menu screen

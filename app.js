@@ -298,7 +298,9 @@ function dragDrop(e) {
     e.stopPropagation();
     let draggedId = draggedElement.parentNode.getAttribute('id');
     let targetAnswer = e.target.parentNode.getAttribute('answer');
-    if (e.target.parentNode.classList.contains('hangul') && (draggedId === targetAnswer)) {
+    let isActive = e.target.getAttribute('clickable') === true;
+    console.log(isActive);
+    if (e.target.parentNode.classList.contains('hangul') && (draggedId === targetAnswer) && (isActive === false)) {
         e.target.parentNode.append(draggedElement);
         e.target.remove();
     }
