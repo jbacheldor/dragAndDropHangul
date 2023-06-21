@@ -89,7 +89,7 @@ div[draggable="true"] {
 }
 
 #menuScreen {
-    background-color:rgba(43, 43, 43, 0.213);
+    background-color: rgba(43, 43, 43, 0.213);
     height: 750px;
     width: 500px;
     display: flex;
@@ -119,4 +119,5 @@ div[draggable="true"] {
 
 .footerIcon {
     cursor: pointer;
+    padding: 10px;
 }

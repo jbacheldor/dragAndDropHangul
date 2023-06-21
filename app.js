@@ -9,53 +9,39 @@ const width = 8;
 const height = 5;
 let optionSelected;
 
-// is it good to create this each time? or can we just store the element 
 function createGameBoard(input) {
     if (gameBoardElement === null || gameBoardElement === undefined) {
-        console.log("hitting here");
+        // creating main board
         const gameBoard = document.createElement('div');
         gameBoard.setAttribute('id', 'gameboard');
         body.append(gameBoard);
+
+        // creating main header 
         const header = document.createElement('div');
         header.setAttribute('id', 'header');
         header.innerHTML = "한글 Matching: " + input;
         gameBoard.append(header);
-        const filterSection = document.createElement('div');
-        filterSection.setAttribute('id', 'filterSection');
-        gameBoard.append(filterSection);
-        // create 
+
+        // creating filter section
+        createFilterSection(gameBoard);
+
+        // create top board
         const topBoard = document.createElement('div');
         topBoard.setAttribute('id', 'topBoard');
         gameBoard.append(topBoard);
-        // create the bottom
+        createTopBoard();
+
+        // create the bottom board
         const bottomBoard = document.createElement('div');
         bottomBoard.setAttribute('id', 'bottomBoard');
         gameBoard.append(bottomBoard);
-        // create the footer
-        const footer = document.createElement('div');
-        footer.setAttribute('id', 'footer');
-        document.createElement('div');
+        createBottomBoard();
 
-        Icons.forEach((icons) => {
-            const { iconElement } = icons;
-            const icon = document.createElement('div');
-            icon.innerHTML = iconElement;
-            icon.classList.add('footerIcon');
-            footer.append(icon);
-        })
-
-        gameBoard.append(footer);
-        const footerIcons = document.querySelectorAll("#footer .footerIcon");
-        footerIcons.forEach(icon => {
-            icon.addEventListener('click', iconClick);
-        })
+        createFooterSection(gameBoard);
 
         gameTopBoard = document.querySelector("#topBoard");
         gameBottomBoard = document.querySelector("#bottomBoard");
         gameBoardElement = document.querySelector("#gameboard");
-
-        createTopBoard();
-        createBottomBoard();
 
         const allBlocks = document.querySelectorAll("#gameboard .block");
 
@@ -65,21 +51,57 @@ function createGameBoard(input) {
             block.addEventListener('drop', dragDrop);
         });
 
-        filtering(filterOptions);
-
-        const allFilters = document.querySelectorAll("#gameboard .filter");
-
-        allFilters.forEach(filter => {
-            filter.addEventListener('click', clickFilter);
-        });
-
     } else {
-        // document.appendChild(gameBoardElement);
-        // console.log(body);
-        body.append(gameBoardElement);
-        // gameBoardElement.append(gameTopBoard);
-        // gameBoardElement.append(gameBottomBoard);
+        resetBottomBoard();
     }
+}
+
+function createFilterSection(gameBoardElement) {
+    const filterSection = document.createElement('div');
+    filterSection.setAttribute('id', 'filterSection');
+    gameBoardElement.append(filterSection);
+
+    filtering(filterOptions);
+
+    const allFilters = document.querySelectorAll("#gameboard .filter");
+
+    allFilters.forEach(filter => {
+        filter.addEventListener('click', clickFilter);
+    });
+}
+
+function createFooterSection(gameBoardElement) {
+    // create the footer
+    const footer = document.createElement('div');
+    footer.setAttribute('id', 'footer');
+
+    // populate the footer icons
+    Icons.forEach((icons) => {
+        const { iconElement } = icons;
+        const icon = document.createElement('div');
+        icon.innerHTML = iconElement;
+        icon.classList.add('footerIcon');
+        footer.append(icon);
+    })
+
+    gameBoardElement.append(footer);
+    const footerIcons = document.querySelectorAll("#footer .footerIcon");
+    footerIcons.forEach(icon => {
+        icon.addEventListener('click', iconClick);
+    })
+}
+
+function resetBottomBoard() {
+    const bottom = gameBoardElement.querySelector("#bottomBoard");
+    const footer = gameBoardElement.querySelector("#footer");
+    gameBoardElement.removeChild(bottom);
+    gameBoardElement.removeChild(footer);
+    const bottomBoard = document.createElement('div');
+    bottomBoard.setAttribute('id', 'bottomBoard');
+    gameBoardElement.append(bottomBoard);
+    body.append(gameBoardElement);
+    createFooterSection(gameBoardElement);
+    createBottomBoard();
 }
 
 // this is currently breaking - need to find a way to add and remove screens - building them up must be time consuming
@@ -125,9 +147,7 @@ menuOptions.forEach(block => {
 function startGame(e) {
     optionSelected = false;
     optionSelected = e.target.innerHTML
-    console.log(menuScreen);
     menuScreen.remove();
-    console.log("body is here", document.querySelector("#body"));
     createGameBoard(e.target.innerHTML);
 }
 
