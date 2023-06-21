@@ -8,6 +8,7 @@ let gameBoardElement;
 const width = 8;
 const height = 5;
 let optionSelected;
+let gameStarted = false;
 
 function createGameBoard(input) {
     if (gameBoardElement === null || gameBoardElement === undefined) {
@@ -102,6 +103,7 @@ function resetBottomBoard() {
     body.append(gameBoardElement);
     createFooterSection(gameBoardElement);
     createBottomBoard();
+    gameStarted = false;
 }
 
 // this is currently breaking - need to find a way to add and remove screens - building them up must be time consuming
@@ -172,6 +174,7 @@ function filtering(options) {
         const filter = document.createElement('div');
         filter.innerHTML = filterOption;
         filter.classList.add('filter');
+        filter.setAttribute('canChangeFilter', true);
         filter.setAttribute('filterType', filterOption);
         filter.setAttribute('filterOn', false);
         filterSection.append(filter);
@@ -285,7 +288,18 @@ function createTopBoard() {
 let dragStartPosition;
 let draggedElement;
 
+function GameStarted() {
+    console.log("is it here");
+    gameStarted = true;
+    const filter = document.querySelectorAll(".filter");
+    filter.forEach((filters) => {
+            filters.setAttribute('canChangeFilter', false);
+        })
+        // timer starts 
+}
+
 function dragStart(e) {
+    GameStarted();
     dragStartPosition = e.target.parentNode.getAttribute('block-id');
     draggedElement = e.target.firstChild;
 }
@@ -295,11 +309,11 @@ function dragOver(e) {
 }
 
 function dragDrop(e) {
+    console.log("is it in dragdrop");
     e.stopPropagation();
     let draggedId = draggedElement.parentNode.getAttribute('id');
     let targetAnswer = e.target.parentNode.getAttribute('answer');
-    let isActive = e.target.getAttribute('clickable') === true;
-    console.log(isActive);
+    let isActive = e.target.getAttribute('clickable') === false;
     if (e.target.parentNode.classList.contains('hangul') && (draggedId === targetAnswer) && (isActive === false)) {
         e.target.parentNode.append(draggedElement);
         e.target.remove();

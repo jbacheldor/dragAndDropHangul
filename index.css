@@ -117,6 +117,11 @@ div[draggable="true"] {
     cursor: pointer;
 }
 
+div [canChangeFilter="false"] {
+    pointer-events: none;
+    color: grey;
+}
+
 .footerIcon {
     cursor: pointer;
     padding: 10px;

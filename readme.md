@@ -26,7 +26,7 @@ features:
 - after the first piece is moved then filtering needs to stop working = no more changes until reset or revert to menu
 - make it so you can't drop into greyed out functionality
 - change it so no matter what browser/size you view it from it shouldn't impact things
-
+- on reset - filtering also needs to be reset 
 
 bugs:
 - figure out what is going on with the footer clicks
