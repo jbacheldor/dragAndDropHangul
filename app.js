@@ -1,42 +1,89 @@
 const menuScreen = document.querySelector("#menuScreen");
 const body = document.querySelector("#body");
-const gameTopBoard = document.querySelector("#topBoard");
-const gameBottomBoard = document.querySelector("#bottomBoard");
-const gameBoard = document.querySelector("#gameboard");
+let gameTopBoard;
+let gameBottomBoard;
+let gameBoardElement;
+let footer;
+
 
 // 40 letters in total 
 const width = 8;
 const height = 5;
 let optionSelected;
+let gameStarted = false;
 
-// is it good to create this each time? or can we just store the element 
-function createGameBoard() {
-    // body.append(gameBoard);
+// this is for reset or when you return home after initial creation
+function removeGameBoard() {
+    document.querySelector('#gameboard').remove();
+    gameBoardElement = document.querySelector('#gameboard');
+}
 
-    const gameBoard = document.createElement('div');
-    gameBoard.setAttribute('id', 'gameboard');
-    body.append(gameBoard);
+function createGameBoard(input) {
+    let gameBoard;
+    // creating main board
+    if (gameBoardElement === null || gameBoardElement === undefined) {
+        gameBoard = document.createElement('div');
+        gameBoard.setAttribute('id', 'gameboard');
+        console.log("in create board 2", document.querySelector("#body"));
+        body.append(gameBoard);
+        gameBoardElement = document.querySelector("#gameboard");
+    }
+
+    // creating main header 
     const header = document.createElement('div');
     header.setAttribute('id', 'header');
-    header.innerHTML = "한글 Matching";
+    header.innerHTML = "한글 Matching: " + input;
     gameBoard.append(header);
+
+    // creating filter section
     const filterSection = document.createElement('div');
     filterSection.setAttribute('id', 'filterSection');
-    gameBoard.append(filterSection);
-    // create 
+    gameBoardElement.append(filterSection);
+    createFilterSection(gameBoard);
+
+    // create top board
     const topBoard = document.createElement('div');
     topBoard.setAttribute('id', 'topBoard');
     gameBoard.append(topBoard);
-    // create the bottom
+    createTopBoard();
+
+    // create the bottom board
     const bottomBoard = document.createElement('div');
     bottomBoard.setAttribute('id', 'bottomBoard');
     gameBoard.append(bottomBoard);
-    // create the footer
+    createBottomBoard();
+
     const footer = document.createElement('div');
     footer.setAttribute('id', 'footer');
-    document.createElement('div');
+    createFooterSection(footer);
 
-    Icons.forEach((icons)=> {
+    gameTopBoard = document.querySelector("#topBoard");
+    gameBottomBoard = document.querySelector("#bottomBoard");
+    const allBlocks = document.querySelectorAll("#gameboard .block");
+
+    allBlocks.forEach(block => {
+        block.addEventListener('dragstart', dragStart);
+        block.addEventListener('dragover', dragOver);
+        block.addEventListener('drop', dragDrop);
+    });
+}
+
+function createFilterSection() {
+
+    filtering(filterOptions);
+
+    const allFilters = document.querySelectorAll("#gameboard .filter");
+
+    allFilters.forEach(filter => {
+        filter.addEventListener('click', clickFilter);
+    });
+}
+
+function createFooterSection(footer) {
+    // create the footer
+
+    // populate the footer icons
+    Icons.forEach((icons) => {
         const { iconElement } = icons;
         const icon = document.createElement('div');
         icon.innerHTML = iconElement;
@@ -44,32 +91,35 @@ function createGameBoard() {
         footer.append(icon);
     })
 
-    gameBoard.append(footer);
+    gameBoardElement.append(footer);
     const footerIcons = document.querySelectorAll("#footer .footerIcon");
     footerIcons.forEach(icon => {
         icon.addEventListener('click', iconClick);
     })
+
+    footer = document.querySelector('#footer');
 }
 
-// this is currently breaking - need to find a way to add and remove screens - building them up must be time consuming
+function reset() {
+    removeGameBoard();
+    createGameBoard(input);
+}
+
 function iconClick(e) {
-    switch(e.target.parentNode.parentNode.getAttribute('id')){
+    switch (e.target.parentNode.parentNode.getAttribute('id')) {
         case 'homeButton':
             const gameBoard = document.querySelector("#gameboard");
-            body.remove(gameBoard);
-            const menuScreen = document.querySelector("#menuScreen");
+            const clickBody = document.querySelector("#body");
+            clickBody.removeChild(gameBoard);
             body.append(menuScreen);
             break;
-        case 'backgroundMusic':
-            console.log("clicky");
+        case 'resetButton':
+            reset();
             break;
-        case 'noMusic':
-            console.log("clicky");
-            break;
-        case 'music':
-            console.log("clicky");
-            break;   
-}}
+        default:
+            console.log("If you're hitting here, something is broken");
+    }
+}
 
 let romanjiOptions = [
     "Initial",
@@ -90,30 +140,14 @@ menuOptions.forEach(block => {
     block.addEventListener('click', startGame);
 });
 
+let input;
+
 function startGame(e) {
     optionSelected = false;
     optionSelected = e.target.innerHTML
     menuScreen.remove();
-    createGameBoard();
-    createTopBoard();
-    createBottomBoard();
-
-    const allBlocks = document.querySelectorAll("#gameboard .block");
-
-    allBlocks.forEach(block => {
-        block.addEventListener('dragstart', dragStart);
-        block.addEventListener('dragover', dragOver);
-        block.addEventListener('drop', dragDrop);
-    });
-
-    filtering(filterOptions);
-
-    const allFilters = document.querySelectorAll("#gameboard .filter");
-
-    allFilters.forEach(filter => {
-        filter.addEventListener('click', clickFilter);
-    });
-    // body.prepend(menuScreen);
+    input = e.target.innerHTML;
+    createGameBoard(e.target.innerHTML);
 }
 
 const filterOptions = [
@@ -131,6 +165,7 @@ function filtering(options) {
         const filter = document.createElement('div');
         filter.innerHTML = filterOption;
         filter.classList.add('filter');
+        filter.setAttribute('canChangeFilter', true);
         filter.setAttribute('filterType', filterOption);
         filter.setAttribute('filterOn', false);
         filterSection.append(filter);
@@ -161,19 +196,20 @@ function clickFilter(e) {
 function randomizeElements() {
     let alphabetArray = Array.from(Alphabet, ([name, value]) => ({ name, value }));
 
-    let currentIndex = alphabetArray.length,  randomIndex;
+    let currentIndex = alphabetArray.length,
+        randomIndex;
     while (currentIndex != 0) {
-
         // Pick a remaining element.
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
-    
+
         // And swap it with the current element.
         [alphabetArray[currentIndex], alphabetArray[randomIndex]] = [
-            alphabetArray[randomIndex], alphabetArray[currentIndex]];
-      }
+            alphabetArray[randomIndex], alphabetArray[currentIndex]
+        ];
+    }
 
-      return alphabetArray;
+    return alphabetArray;
 }
 
 function createBottomBoard() {
@@ -243,7 +279,18 @@ function createTopBoard() {
 let dragStartPosition;
 let draggedElement;
 
+function GameStarted() {
+    console.log("is it here");
+    gameStarted = true;
+    const filter = document.querySelectorAll(".filter");
+    filter.forEach((filters) => {
+            filters.setAttribute('canChangeFilter', false);
+        })
+        // timer starts 
+}
+
 function dragStart(e) {
+    GameStarted();
     dragStartPosition = e.target.parentNode.getAttribute('block-id');
     draggedElement = e.target.firstChild;
 }
@@ -253,10 +300,12 @@ function dragOver(e) {
 }
 
 function dragDrop(e) {
+    console.log("is it in dragdrop");
     e.stopPropagation();
     let draggedId = draggedElement.parentNode.getAttribute('id');
     let targetAnswer = e.target.parentNode.getAttribute('answer');
-    if (e.target.parentNode.classList.contains('hangul') && (draggedId === targetAnswer)) {
+    let isActive = e.target.getAttribute('clickable') === false;
+    if (e.target.parentNode.classList.contains('hangul') && (draggedId === targetAnswer) && (isActive === false)) {
         e.target.parentNode.append(draggedElement);
         e.target.remove();
     }

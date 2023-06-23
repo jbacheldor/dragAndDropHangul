@@ -89,7 +89,7 @@ div[draggable="true"] {
 }
 
 #menuScreen {
-    background-color:rgba(43, 43, 43, 0.213);
+    background-color: rgba(43, 43, 43, 0.213);
     height: 750px;
     width: 500px;
     display: flex;
@@ -117,6 +117,17 @@ div[draggable="true"] {
     cursor: pointer;
 }
 
+div [canChangeFilter="false"] {
+    pointer-events: none;
+    color: grey;
+}
+
 .footerIcon {
     cursor: pointer;
+    padding: 10px;
+}
+
+.resetButton {
+    color: black;
+    font-size: 20px;
 }
