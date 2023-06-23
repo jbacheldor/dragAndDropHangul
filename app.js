@@ -28,7 +28,6 @@ function createGameBoard(input) {
         body.append(gameBoard);
         gameBoardElement = document.querySelector("#gameboard");
     }
-    console.log(gameBoardElement);
 
     // creating main header 
     const header = document.createElement('div');
@@ -67,7 +66,6 @@ function createGameBoard(input) {
         block.addEventListener('dragover', dragOver);
         block.addEventListener('drop', dragDrop);
     });
-    console.log("at end of create", document.querySelector("#body"));
 }
 
 function createFilterSection() {
@@ -102,34 +100,11 @@ function createFooterSection(footer) {
     footer = document.querySelector('#footer');
 }
 
-// reset does a complete overhaul and recreation
 function reset() {
     removeGameBoard();
     createGameBoard(input);
-    // const bottom = gameBoardElement.querySelector("#bottomBoard");
-    // const footer = gameBoardElement.querySelector("#footer");
-    // gameBoardElement.removeChild(bottom);
-    // gameBoardElement.removeChild(footer);
-    // const bottomBoard = document.createElement('div');
-    // bottomBoard.setAttribute('id', 'bottomBoard');
-    // gameBoardElement.append(bottomBoard);
-    // body.append(gameBoardElement);
-    // createFooterSection(gameBoardElement);
-    // createBottomBoard();
-    // gameStarted = false;
-    // const filter = document.querySelectorAll(".filter");
-    // filter.forEach((filters) => {
-    //     filters.setAttribute('canChangeFilter', true);
-    //     filters.setAttribute('filterOn', false);
-    // })
-    // const allBlocks = document.querySelectorAll("#gameboard .letter");
-
-    // allBlocks.forEach(block => {
-    //     block.setAttribute('clickable', true);
-    // });
 }
 
-// this is currently breaking - need to find a way to add and remove screens - building them up must be time consuming
 function iconClick(e) {
     switch (e.target.parentNode.parentNode.getAttribute('id')) {
         case 'homeButton':
@@ -139,22 +114,10 @@ function iconClick(e) {
             body.append(menuScreen);
             break;
         case 'resetButton':
-            console.log('hitting in reset button');
             reset();
             break;
-        case 'backgroundMusic':
-            console.log("clicky");
-            break;
-        case 'noMusic':
-            console.log("clicky");
-            break;
-        case 'Music':
-            console.log("clicky");
-            break;
         default:
-            console.log("always hits in here on the first click why");
-            console.log("hitting in default");
-            console.log((e.target.parentNode.getAttribute('id')));
+            console.log("If you're hitting here, something is broken");
     }
 }
 

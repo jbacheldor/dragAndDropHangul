@@ -19,14 +19,12 @@ to-do:
 
 readiability:
 - try to break elements into their own files
-- look into reset functionality
+- home button and back loop not working
+- also the reset button isn't always working 
 
 features:
 - add in time clock
-- after the first piece is moved then filtering needs to stop working = no more changes until reset or revert to menu
-- make it so you can't drop into greyed out functionality
 - change it so no matter what browser/size you view it from it shouldn't impact things
-- on reset - filtering also needs to be reset 
 
 bugs:
 - figure out what is going on with the footer clicks
@@ -36,7 +34,6 @@ small things:
 - change the clickable component in the blocks to be something else - like is active
 - change the icons mapping to not be 3 deep for the reset 
 - the body is weird and not sized properly to match the elements
-- make it so the footer doesn't have to disappear on reset is possible
 - change overall sizing so scroll isn't needed
 
 
