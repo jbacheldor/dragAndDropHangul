@@ -3,6 +3,8 @@ const body = document.querySelector("#body");
 let gameTopBoard;
 let gameBottomBoard;
 let gameBoardElement;
+let footer;
+
 
 // 40 letters in total 
 const width = 8;
@@ -10,57 +12,65 @@ const height = 5;
 let optionSelected;
 let gameStarted = false;
 
-function createGameBoard(input) {
-    if (gameBoardElement === null || gameBoardElement === undefined) {
-        // creating main board
-        const gameBoard = document.createElement('div');
-        gameBoard.setAttribute('id', 'gameboard');
-        body.append(gameBoard);
-
-        // creating main header 
-        const header = document.createElement('div');
-        header.setAttribute('id', 'header');
-        header.innerHTML = "한글 Matching: " + input;
-        gameBoard.append(header);
-
-        // creating filter section
-        createFilterSection(gameBoard);
-
-        // create top board
-        const topBoard = document.createElement('div');
-        topBoard.setAttribute('id', 'topBoard');
-        gameBoard.append(topBoard);
-        createTopBoard();
-
-        // create the bottom board
-        const bottomBoard = document.createElement('div');
-        bottomBoard.setAttribute('id', 'bottomBoard');
-        gameBoard.append(bottomBoard);
-        createBottomBoard();
-
-        createFooterSection(gameBoard);
-
-        gameTopBoard = document.querySelector("#topBoard");
-        gameBottomBoard = document.querySelector("#bottomBoard");
-        gameBoardElement = document.querySelector("#gameboard");
-
-        const allBlocks = document.querySelectorAll("#gameboard .block");
-
-        allBlocks.forEach(block => {
-            block.addEventListener('dragstart', dragStart);
-            block.addEventListener('dragover', dragOver);
-            block.addEventListener('drop', dragDrop);
-        });
-
-    } else {
-        resetBottomBoard();
-    }
+// this is for reset or when you return home after initial creation
+function removeGameBoard() {
+    document.querySelector('#gameboard').remove();
+    gameBoardElement = document.querySelector('#gameboard');
 }
 
-function createFilterSection(gameBoardElement) {
+function createGameBoard(input) {
+    let gameBoard;
+    // creating main board
+    if (gameBoardElement === null || gameBoardElement === undefined) {
+        gameBoard = document.createElement('div');
+        gameBoard.setAttribute('id', 'gameboard');
+        console.log("in create board 2", document.querySelector("#body"));
+        body.append(gameBoard);
+        gameBoardElement = document.querySelector("#gameboard");
+    }
+    console.log(gameBoardElement);
+
+    // creating main header 
+    const header = document.createElement('div');
+    header.setAttribute('id', 'header');
+    header.innerHTML = "한글 Matching: " + input;
+    gameBoard.append(header);
+
+    // creating filter section
     const filterSection = document.createElement('div');
     filterSection.setAttribute('id', 'filterSection');
     gameBoardElement.append(filterSection);
+    createFilterSection(gameBoard);
+
+    // create top board
+    const topBoard = document.createElement('div');
+    topBoard.setAttribute('id', 'topBoard');
+    gameBoard.append(topBoard);
+    createTopBoard();
+
+    // create the bottom board
+    const bottomBoard = document.createElement('div');
+    bottomBoard.setAttribute('id', 'bottomBoard');
+    gameBoard.append(bottomBoard);
+    createBottomBoard();
+
+    const footer = document.createElement('div');
+    footer.setAttribute('id', 'footer');
+    createFooterSection(footer);
+
+    gameTopBoard = document.querySelector("#topBoard");
+    gameBottomBoard = document.querySelector("#bottomBoard");
+    const allBlocks = document.querySelectorAll("#gameboard .block");
+
+    allBlocks.forEach(block => {
+        block.addEventListener('dragstart', dragStart);
+        block.addEventListener('dragover', dragOver);
+        block.addEventListener('drop', dragDrop);
+    });
+    console.log("at end of create", document.querySelector("#body"));
+}
+
+function createFilterSection() {
 
     filtering(filterOptions);
 
@@ -71,10 +81,8 @@ function createFilterSection(gameBoardElement) {
     });
 }
 
-function createFooterSection(gameBoardElement) {
+function createFooterSection(footer) {
     // create the footer
-    const footer = document.createElement('div');
-    footer.setAttribute('id', 'footer');
 
     // populate the footer icons
     Icons.forEach((icons) => {
@@ -90,20 +98,35 @@ function createFooterSection(gameBoardElement) {
     footerIcons.forEach(icon => {
         icon.addEventListener('click', iconClick);
     })
+
+    footer = document.querySelector('#footer');
 }
 
-function resetBottomBoard() {
-    const bottom = gameBoardElement.querySelector("#bottomBoard");
-    const footer = gameBoardElement.querySelector("#footer");
-    gameBoardElement.removeChild(bottom);
-    gameBoardElement.removeChild(footer);
-    const bottomBoard = document.createElement('div');
-    bottomBoard.setAttribute('id', 'bottomBoard');
-    gameBoardElement.append(bottomBoard);
-    body.append(gameBoardElement);
-    createFooterSection(gameBoardElement);
-    createBottomBoard();
-    gameStarted = false;
+// reset does a complete overhaul and recreation
+function reset() {
+    removeGameBoard();
+    createGameBoard(input);
+    // const bottom = gameBoardElement.querySelector("#bottomBoard");
+    // const footer = gameBoardElement.querySelector("#footer");
+    // gameBoardElement.removeChild(bottom);
+    // gameBoardElement.removeChild(footer);
+    // const bottomBoard = document.createElement('div');
+    // bottomBoard.setAttribute('id', 'bottomBoard');
+    // gameBoardElement.append(bottomBoard);
+    // body.append(gameBoardElement);
+    // createFooterSection(gameBoardElement);
+    // createBottomBoard();
+    // gameStarted = false;
+    // const filter = document.querySelectorAll(".filter");
+    // filter.forEach((filters) => {
+    //     filters.setAttribute('canChangeFilter', true);
+    //     filters.setAttribute('filterOn', false);
+    // })
+    // const allBlocks = document.querySelectorAll("#gameboard .letter");
+
+    // allBlocks.forEach(block => {
+    //     block.setAttribute('clickable', true);
+    // });
 }
 
 // this is currently breaking - need to find a way to add and remove screens - building them up must be time consuming
@@ -116,8 +139,8 @@ function iconClick(e) {
             body.append(menuScreen);
             break;
         case 'resetButton':
-            console.log('hitting here');
-            resetBottomBoard();
+            console.log('hitting in reset button');
+            reset();
             break;
         case 'backgroundMusic':
             console.log("clicky");
@@ -129,7 +152,9 @@ function iconClick(e) {
             console.log("clicky");
             break;
         default:
-            console.log((e.target.parentNode.parentNode.getAttribute('id')));
+            console.log("always hits in here on the first click why");
+            console.log("hitting in default");
+            console.log((e.target.parentNode.getAttribute('id')));
     }
 }
 
@@ -152,10 +177,13 @@ menuOptions.forEach(block => {
     block.addEventListener('click', startGame);
 });
 
+let input;
+
 function startGame(e) {
     optionSelected = false;
     optionSelected = e.target.innerHTML
     menuScreen.remove();
+    input = e.target.innerHTML;
     createGameBoard(e.target.innerHTML);
 }
 
