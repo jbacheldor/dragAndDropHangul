@@ -4,7 +4,10 @@ let gameTopBoard;
 let gameBottomBoard;
 let gameBoardElement;
 let footer;
-
+var Interval;
+var seconds = 00;
+var tens = 00;
+var mins = 00;
 
 // 40 letters in total 
 const width = 8;
@@ -54,15 +57,8 @@ function createGameBoard(input) {
     footer.setAttribute('id', 'footer');
     gameBoardElement.append(footer);
 
-    // create timer 
-
-    gameBoardElement = document.querySelector("#gameboard");
-    const timer = document.createElement('div');
-    timer.setAttribute('id', 'timer');
-
-    footer.append(timer);
-    createTimer();
     createFooterSection();
+    // https://codepen.io/cathydutton/pen/xxpOOw
 
     gameTopBoard = document.querySelector("#topBoard");
     gameBottomBoard = document.querySelector("#bottomBoard");
@@ -108,21 +104,56 @@ function createFooterSection() {
 }
 
 function reset() {
+    gameStarted = false;
     removeGameBoard();
     createGameBoard(input);
 }
 
-function createTimer() {
-    console.log("inside create timer");
-    console.log(Date());
+function startTimer() {
+    const appendMilli = document.querySelector("#milli");
+    const appendSeconds = document.querySelector("#seconds");
+    const appendMins = document.querySelector("#mins");
+
+    tens++;
+
+    if (tens <= 9) {
+        appendMilli.innerHTML = "0" + tens;
+    }
+
+    if (tens > 9) {
+        appendMilli.innerHTML = tens;
+
+    }
+
+    if (seconds >= 60) {
+        appendSeconds.innerHTML = 00;
+        seconds = 00;
+        mins++;
+        appendMins.innerHTML = "0" + mins;
+        appendSeconds.innerHTML = "0" + 0;
+    }
+
+    if (tens > 99) {
+        seconds++;
+        appendSeconds.innerHTML = "0" + seconds;
+        tens = 0;
+        appendMilli.innerHTML = "0" + 0;
+    }
+
+    if (seconds > 9) {
+        appendSeconds.innerHTML = seconds;
+    }
+
+    if (mins > 60) {
+        // maybe an alert here that stops it so it stops eating up memory
+        stopTimer();
+    }
+
 }
 
-function startTimer() {
-    console.log("inside start timer");
-}
 
 function stopTimer() {
-    console.log("inside stop timer");
+    clearInterval(Interval);
 }
 
 function iconClick(e) {
@@ -310,7 +341,11 @@ function GameStarted() {
 }
 
 function dragStart(e) {
-    GameStarted();
+    if (gameStarted != true) {
+        GameStarted();
+        clearInterval(Interval);
+        Interval = setInterval(startTimer, 10);
+    }
     dragStartPosition = e.target.parentNode.getAttribute('block-id');
     draggedElement = e.target.firstChild;
 }

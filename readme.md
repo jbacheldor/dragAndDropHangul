@@ -14,25 +14,20 @@ https://creativecommons.org/licenses/by-sa/3.0/
 Icons used in early testing from:
 fontawesome.com
 
+Vanilla JS tech stack
 
 to-do:
 
 readiability:
 - try to break elements into their own files
-- home button and back loop not working
-- also the reset button isn't always working 
 
 features:
 - add in time clock
 - change it so no matter what browser/size you view it from it shouldn't impact things
 
-bugs:
-- figure out what is going on with the footer clicks
-
 small things:
 - remove the character from mapping - not being used
 - change the clickable component in the blocks to be something else - like is active
-- change the icons mapping to not be 3 deep for the reset 
 - the body is weird and not sized properly to match the elements
 - change overall sizing so scroll isn't needed
 
