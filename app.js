@@ -7,7 +7,7 @@ let footer;
 var Interval;
 var seconds = 00;
 var tens = 00;
-var mins = 00;
+var mins = 59;
 
 // 40 letters in total 
 const width = 8;
@@ -157,7 +157,9 @@ function startTimer() {
 
 function stopTimer() {
     clearInterval(Interval);
-    console.log(Interval);
+    seconds = 00;
+    tens = 00;
+    mins = 00;
 }
 
 function iconClick(e) {
