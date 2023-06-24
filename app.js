@@ -122,22 +122,6 @@ function startTimer() {
 
     if (tens > 9) {
         appendMilli.innerHTML = tens;
-
-    }
-
-    if (seconds >= 60) {
-        appendSeconds.innerHTML = 00;
-        seconds = 00;
-        mins++;
-        appendMins.innerHTML = "0" + mins;
-        appendSeconds.innerHTML = "0" + 0;
-    }
-
-    if (mins > 9) {
-        seconds = 00;
-        mins++;
-        appendMins.innerHTML = mins;
-        appendSeconds.innerHTML = "0" + 0;
     }
 
     if (tens > 99) {
@@ -151,8 +135,20 @@ function startTimer() {
         appendSeconds.innerHTML = seconds;
     }
 
+    if (seconds > 59) {
+        appendSeconds.innerHTML = 00;
+        seconds = 00;
+        mins++;
+        appendMins.innerHTML = "0" + mins;
+        appendSeconds.innerHTML = "0" + 0;
+    }
+
+    if (mins > 9) {
+        appendMins.innerHTML = mins;
+    }
+
+    // it's messin up here
     if (mins > 59) {
-        // maybe an alert here that stops it so it stops eating up memory
         stopTimer();
     }
 
@@ -161,6 +157,7 @@ function startTimer() {
 
 function stopTimer() {
     clearInterval(Interval);
+    console.log(Interval);
 }
 
 function iconClick(e) {
