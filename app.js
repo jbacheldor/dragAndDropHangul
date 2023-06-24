@@ -53,6 +53,15 @@ function createGameBoard(input) {
     const footer = document.createElement('div');
     footer.setAttribute('id', 'footer');
     gameBoardElement.append(footer);
+
+    // create timer 
+
+    gameBoardElement = document.querySelector("#gameboard");
+    const timer = document.createElement('div');
+    timer.setAttribute('id', 'timer');
+
+    footer.append(timer);
+    createTimer();
     createFooterSection();
 
     gameTopBoard = document.querySelector("#topBoard");
@@ -103,7 +112,21 @@ function reset() {
     createGameBoard(input);
 }
 
+function createTimer() {
+    console.log("inside create timer");
+    console.log(Date());
+}
+
+function startTimer() {
+    console.log("inside start timer");
+}
+
+function stopTimer() {
+    console.log("inside stop timer");
+}
+
 function iconClick(e) {
+    stopTimer();
     switch (e.target.getAttribute('id')) {
         case 'homeButton':
             const gameBoard = document.querySelector("#gameboard");
@@ -278,6 +301,7 @@ let draggedElement;
 
 function GameStarted() {
     gameStarted = true;
+    startTimer();
     const filter = document.querySelectorAll(".filter");
     filter.forEach((filters) => {
             filters.setAttribute('canChangeFilter', false);
