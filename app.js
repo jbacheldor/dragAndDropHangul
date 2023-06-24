@@ -133,6 +133,13 @@ function startTimer() {
         appendSeconds.innerHTML = "0" + 0;
     }
 
+    if (mins > 9) {
+        seconds = 00;
+        mins++;
+        appendMins.innerHTML = mins;
+        appendSeconds.innerHTML = "0" + 0;
+    }
+
     if (tens > 99) {
         seconds++;
         appendSeconds.innerHTML = "0" + seconds;
@@ -144,7 +151,7 @@ function startTimer() {
         appendSeconds.innerHTML = seconds;
     }
 
-    if (mins > 60) {
+    if (mins > 59) {
         // maybe an alert here that stops it so it stops eating up memory
         stopTimer();
     }
