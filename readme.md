@@ -22,7 +22,6 @@ readiability:
 - try to break elements into their own files
 
 features:
-- add in time clock
 - change it so no matter what browser/size you view it from it shouldn't impact things
 
 small things:
