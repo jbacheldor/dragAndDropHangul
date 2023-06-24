@@ -21,13 +21,10 @@ function removeGameBoard() {
 function createGameBoard(input) {
     let gameBoard;
     // creating main board
-    if (gameBoardElement === null || gameBoardElement === undefined) {
-        gameBoard = document.createElement('div');
-        gameBoard.setAttribute('id', 'gameboard');
-        console.log("in create board 2", document.querySelector("#body"));
-        body.append(gameBoard);
-        gameBoardElement = document.querySelector("#gameboard");
-    }
+    gameBoard = document.createElement('div');
+    gameBoard.setAttribute('id', 'gameboard');
+    body.append(gameBoard);
+    gameBoardElement = document.querySelector("#gameboard");
 
     // creating main header 
     const header = document.createElement('div');
@@ -109,8 +106,7 @@ function iconClick(e) {
     switch (e.target.parentNode.parentNode.getAttribute('id')) {
         case 'homeButton':
             const gameBoard = document.querySelector("#gameboard");
-            const clickBody = document.querySelector("#body");
-            clickBody.removeChild(gameBoard);
+            gameBoard.remove();
             body.append(menuScreen);
             break;
         case 'resetButton':
