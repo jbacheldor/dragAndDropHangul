@@ -166,8 +166,8 @@ function iconClick(e) {
     stopTimer();
     switch (e.target.getAttribute('id')) {
         case 'homeButton':
-            const gameBoard = document.querySelector("#gameboard");
-            gameBoard.remove();
+            gameStarted = false;
+            removeGameBoard();
             body.append(menuScreen);
             break;
         case 'resetButton':
