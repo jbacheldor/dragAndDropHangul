@@ -29,6 +29,8 @@ small things:
 - change the clickable component in the blocks to be something else - like is active
 - the body is weird and not sized properly to match the elements
 - change overall sizing so scroll isn't needed
+- the home button is changing every so slightly as the counter goes 
+- the filter inactive shows the same as when the game start and is frozen. makes it hard to know what is running
 
 
 background:
