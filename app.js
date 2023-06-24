@@ -36,7 +36,7 @@ function createGameBoard(input) {
     const filterSection = document.createElement('div');
     filterSection.setAttribute('id', 'filterSection');
     gameBoardElement.append(filterSection);
-    createFilterSection(gameBoard);
+    createFilterSection();
 
     // create top board
     const topBoard = document.createElement('div');
@@ -52,7 +52,8 @@ function createGameBoard(input) {
 
     const footer = document.createElement('div');
     footer.setAttribute('id', 'footer');
-    createFooterSection(footer);
+    gameBoardElement.append(footer);
+    createFooterSection();
 
     gameTopBoard = document.querySelector("#topBoard");
     gameBottomBoard = document.querySelector("#bottomBoard");
@@ -76,25 +77,25 @@ function createFilterSection() {
     });
 }
 
-function createFooterSection(footer) {
+function createFooterSection() {
     // create the footer
-
+    const footer = document.querySelector("#footer");
     // populate the footer icons
     Icons.forEach((icons) => {
         const { iconElement } = icons;
         const icon = document.createElement('div');
         icon.innerHTML = iconElement;
+        icon.firstChild.classList.add('icon');
         icon.classList.add('footerIcon');
         footer.append(icon);
     })
 
     gameBoardElement.append(footer);
-    const footerIcons = document.querySelectorAll("#footer .footerIcon");
+    const footerIcons = document.querySelectorAll("#gameboard .icon");
     footerIcons.forEach(icon => {
         icon.addEventListener('click', iconClick);
     })
 
-    footer = document.querySelector('#footer');
 }
 
 function reset() {
@@ -103,7 +104,7 @@ function reset() {
 }
 
 function iconClick(e) {
-    switch (e.target.parentNode.parentNode.getAttribute('id')) {
+    switch (e.target.getAttribute('id')) {
         case 'homeButton':
             const gameBoard = document.querySelector("#gameboard");
             gameBoard.remove();
@@ -276,7 +277,6 @@ let dragStartPosition;
 let draggedElement;
 
 function GameStarted() {
-    console.log("is it here");
     gameStarted = true;
     const filter = document.querySelectorAll(".filter");
     filter.forEach((filters) => {
@@ -296,7 +296,6 @@ function dragOver(e) {
 }
 
 function dragDrop(e) {
-    console.log("is it in dragdrop");
     e.stopPropagation();
     let draggedId = draggedElement.parentNode.getAttribute('id');
     let targetAnswer = e.target.parentNode.getAttribute('answer');

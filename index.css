@@ -123,8 +123,19 @@ div [canChangeFilter="false"] {
 }
 
 .footerIcon {
+    background-color: transparent;
+}
+
+.icon {
     cursor: pointer;
-    padding: 10px;
+    padding: 20px;
+    z-index: 5;
+}
+
+svg {
+    z-index: 100;
+    z-index: -1;
+    position: relative;
 }
 
 .resetButton {
