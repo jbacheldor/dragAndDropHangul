@@ -7,7 +7,7 @@ let footer;
 var Interval;
 var seconds = 00;
 var tens = 00;
-var mins = 59;
+var mins = 00;
 
 // 40 letters in total 
 const width = 8;
