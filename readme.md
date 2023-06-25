@@ -16,6 +16,8 @@ fontawesome.com
 
 Vanilla JS tech stack
 
+Website currently deployed at: https://jbacheldor.github.io/dragAndDropHangul/
+
 to-do:
 
 readiability:
@@ -23,6 +25,7 @@ readiability:
 
 features:
 - change it so no matter what browser/size you view it from it shouldn't impact things
+- get it onto the website
 
 small things:
 - remove the character from mapping - not being used
@@ -31,6 +34,8 @@ small things:
 - change overall sizing so scroll isn't needed
 - the home button is changing every so slightly as the counter goes 
 - the filter inactive shows the same as when the game start and is frozen. makes it hard to know what is running
+- there are still some repeats on letting (besides the 't' that cause issues)
+- also now with the addition of the blocks. the background is pulling now too
 
 
 background:
