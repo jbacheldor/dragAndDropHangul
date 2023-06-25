@@ -1,6 +1,6 @@
 #gameboard {
-    width: 500px;
-    height: 500px;
+    width: 560px;
+    height: 600px;
     /* background-color: transparent;
     display: flex;
     flex-wrap: wrap; */
@@ -15,11 +15,14 @@ body {
     width: 50px;
     position: relative;
     color: black;
-    font-size: 30px;
+    font-size: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 2;
+    margin: 3px;
+    background-color: rgb(142, 245, 245);
+    border-radius: 15px;
 }
 
 path {
@@ -33,14 +36,14 @@ path {
 }
 
 #topBoard {
-    height: 300px;
+    height: 250px;
     background-color: bisque;
     display: flex;
     flex-wrap: wrap;
 }
 
 #bottomBoard {
-    height: 300px;
+    height: 250px;
     background-color: lightblue;
     display: flex;
     flex-wrap: wrap;
@@ -78,6 +81,7 @@ div[draggable="true"] {
 
 .hangul {
     font-weight: bold;
+    font-size: 30px;
 }
 
 #header {
@@ -123,8 +127,25 @@ div [canChangeFilter="false"] {
 }
 
 .footerIcon {
+    background-color: transparent;
+}
+
+.icon {
     cursor: pointer;
-    padding: 10px;
+    padding: 20px;
+    z-index: 5;
+    font-size: 22px;
+}
+
+svg {
+    z-index: 100;
+    z-index: -1;
+    position: relative;
+}
+
+#timer {
+    display: flex;
+    flex-direction: row;
 }
 
 .resetButton {

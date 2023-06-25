@@ -14,27 +14,28 @@ https://creativecommons.org/licenses/by-sa/3.0/
 Icons used in early testing from:
 fontawesome.com
 
+Vanilla JS tech stack
+
+Website currently deployed at: https://jbacheldor.github.io/dragAndDropHangul/
 
 to-do:
 
 readiability:
 - try to break elements into their own files
-- home button and back loop not working
-- also the reset button isn't always working 
 
 features:
-- add in time clock
 - change it so no matter what browser/size you view it from it shouldn't impact things
-
-bugs:
-- figure out what is going on with the footer clicks
+- get it onto the website
 
 small things:
 - remove the character from mapping - not being used
 - change the clickable component in the blocks to be something else - like is active
-- change the icons mapping to not be 3 deep for the reset 
 - the body is weird and not sized properly to match the elements
 - change overall sizing so scroll isn't needed
+- the home button is changing every so slightly as the counter goes 
+- the filter inactive shows the same as when the game start and is frozen. makes it hard to know what is running
+- there are still some repeats on letting (besides the 't' that cause issues)
+- also now with the addition of the blocks. the background is pulling now too
 
 
 background:

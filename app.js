@@ -4,7 +4,10 @@ let gameTopBoard;
 let gameBottomBoard;
 let gameBoardElement;
 let footer;
-
+var Interval;
+var seconds = 00;
+var tens = 00;
+var mins = 59;
 
 // 40 letters in total 
 const width = 8;
@@ -21,13 +24,10 @@ function removeGameBoard() {
 function createGameBoard(input) {
     let gameBoard;
     // creating main board
-    if (gameBoardElement === null || gameBoardElement === undefined) {
-        gameBoard = document.createElement('div');
-        gameBoard.setAttribute('id', 'gameboard');
-        console.log("in create board 2", document.querySelector("#body"));
-        body.append(gameBoard);
-        gameBoardElement = document.querySelector("#gameboard");
-    }
+    gameBoard = document.createElement('div');
+    gameBoard.setAttribute('id', 'gameboard');
+    body.append(gameBoard);
+    gameBoardElement = document.querySelector("#gameboard");
 
     // creating main header 
     const header = document.createElement('div');
@@ -39,7 +39,7 @@ function createGameBoard(input) {
     const filterSection = document.createElement('div');
     filterSection.setAttribute('id', 'filterSection');
     gameBoardElement.append(filterSection);
-    createFilterSection(gameBoard);
+    createFilterSection();
 
     // create top board
     const topBoard = document.createElement('div');
@@ -55,7 +55,10 @@ function createGameBoard(input) {
 
     const footer = document.createElement('div');
     footer.setAttribute('id', 'footer');
-    createFooterSection(footer);
+    gameBoardElement.append(footer);
+
+    createFooterSection();
+    // https://codepen.io/cathydutton/pen/xxpOOw
 
     gameTopBoard = document.querySelector("#topBoard");
     gameBottomBoard = document.querySelector("#bottomBoard");
@@ -79,38 +82,92 @@ function createFilterSection() {
     });
 }
 
-function createFooterSection(footer) {
+function createFooterSection() {
     // create the footer
-
+    const footer = document.querySelector("#footer");
     // populate the footer icons
     Icons.forEach((icons) => {
         const { iconElement } = icons;
         const icon = document.createElement('div');
         icon.innerHTML = iconElement;
+        icon.firstChild.classList.add('icon');
         icon.classList.add('footerIcon');
         footer.append(icon);
     })
 
     gameBoardElement.append(footer);
-    const footerIcons = document.querySelectorAll("#footer .footerIcon");
+    const footerIcons = document.querySelectorAll("#gameboard .icon");
     footerIcons.forEach(icon => {
         icon.addEventListener('click', iconClick);
     })
 
-    footer = document.querySelector('#footer');
 }
 
 function reset() {
+    gameStarted = false;
     removeGameBoard();
     createGameBoard(input);
 }
 
+function startTimer() {
+    const appendMilli = document.querySelector("#milli");
+    const appendSeconds = document.querySelector("#seconds");
+    const appendMins = document.querySelector("#mins");
+
+    tens++;
+
+    if (tens <= 9) {
+        appendMilli.innerHTML = "0" + tens;
+    }
+
+    if (tens > 9) {
+        appendMilli.innerHTML = tens;
+    }
+
+    if (tens > 99) {
+        seconds++;
+        appendSeconds.innerHTML = "0" + seconds;
+        tens = 0;
+        appendMilli.innerHTML = "0" + 0;
+    }
+
+    if (seconds > 9) {
+        appendSeconds.innerHTML = seconds;
+    }
+
+    if (seconds > 59) {
+        appendSeconds.innerHTML = 00;
+        seconds = 00;
+        mins++;
+        appendMins.innerHTML = "0" + mins;
+        appendSeconds.innerHTML = "0" + 0;
+    }
+
+    if (mins > 9) {
+        appendMins.innerHTML = mins;
+    }
+
+    // it's messin up here
+    if (mins > 59) {
+        stopTimer();
+    }
+
+}
+
+
+function stopTimer() {
+    clearInterval(Interval);
+    seconds = 00;
+    tens = 00;
+    mins = 00;
+}
+
 function iconClick(e) {
-    switch (e.target.parentNode.parentNode.getAttribute('id')) {
+    stopTimer();
+    switch (e.target.getAttribute('id')) {
         case 'homeButton':
-            const gameBoard = document.querySelector("#gameboard");
-            const clickBody = document.querySelector("#body");
-            clickBody.removeChild(gameBoard);
+            gameStarted = false;
+            removeGameBoard();
             body.append(menuScreen);
             break;
         case 'resetButton':
@@ -280,8 +337,8 @@ let dragStartPosition;
 let draggedElement;
 
 function GameStarted() {
-    console.log("is it here");
     gameStarted = true;
+    startTimer();
     const filter = document.querySelectorAll(".filter");
     filter.forEach((filters) => {
             filters.setAttribute('canChangeFilter', false);
@@ -290,7 +347,11 @@ function GameStarted() {
 }
 
 function dragStart(e) {
-    GameStarted();
+    if (gameStarted != true) {
+        GameStarted();
+        clearInterval(Interval);
+        Interval = setInterval(startTimer, 10);
+    }
     dragStartPosition = e.target.parentNode.getAttribute('block-id');
     draggedElement = e.target.firstChild;
 }
@@ -300,7 +361,6 @@ function dragOver(e) {
 }
 
 function dragDrop(e) {
-    console.log("is it in dragdrop");
     e.stopPropagation();
     let draggedId = draggedElement.parentNode.getAttribute('id');
     let targetAnswer = e.target.parentNode.getAttribute('answer');
