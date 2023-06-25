@@ -6,8 +6,15 @@
     flex-wrap: wrap; */
 }
 
+html {
+    display: table;
+    margin: auto;
+}
+
 body {
     font-family: 'Lato', sans-serif;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .block {
