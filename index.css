@@ -101,7 +101,7 @@ div[draggable="true"] {
 
 #menuScreen {
     background-color: rgba(43, 43, 43, 0.213);
-    height: 750px;
+    height: 650px;
     width: 500px;
     display: flex;
     justify-content: center;
@@ -131,6 +131,11 @@ div[draggable="true"] {
 div [canChangeFilter="false"] {
     pointer-events: none;
     color: grey;
+}
+
+div [filterOn="true"] {
+    color: green;
+    font-weight: bold;
 }
 
 .footerIcon {

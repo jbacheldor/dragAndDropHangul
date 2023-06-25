@@ -34,8 +34,10 @@ small things:
 - change overall sizing so scroll isn't needed
 - the home button is changing every so slightly as the counter goes 
 - the filter inactive shows the same as when the game start and is frozen. makes it hard to know what is running
-- there are still some repeats on letting (besides the 't' that cause issues)
+- there are still some repeats on letting (besides the 't' that cause issues) - p (final) - is ss final accurate ?
 - also now with the addition of the blocks. the background is pulling now too
+- the dropping is finicky  
+- when the bottom board is empty the timer should stop - but also needs to stop even with the greyed out ones too       - maybe once all of the values of a specific type on top that aren't unclickable are of type letter
 
 
 background:

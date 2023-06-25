@@ -280,6 +280,7 @@ function createBottomBoard() {
                 block.classList.add('block');
                 block.classList.add('romanji');
                 if (romanjiInitialLetter != undefined) { block.innerHTML = romanjiInitialLetter; }
+                block.firstChild.classList.add('answer');
                 block.setAttribute('draggable', true);
                 block.setAttribute('id', romanji);
                 gameBottomBoard.append(block);
@@ -292,6 +293,7 @@ function createBottomBoard() {
                 block.classList.add('block');
                 block.classList.add('romanji');
                 if (romanjiFinalLetter != undefined) { block.innerHTML = romanjiFinalLetter; }
+                block.firstChild.classList.add('answer');
                 block.setAttribute('draggable', true);
                 if (optionSelected === "Final" && romanji.includes('t')) {
                     block.setAttribute('id', "t");
@@ -308,6 +310,7 @@ function createBottomBoard() {
                 block.classList.add('block');
                 block.classList.add('romanji');
                 if (romanjiBothLetter != undefined) { block.innerHTML = romanjiBothLetter; }
+                block.firstChild.classList.add('answer');
                 block.setAttribute('draggable', true);
                 block.setAttribute('id', romanji);
                 gameBottomBoard.append(block);
