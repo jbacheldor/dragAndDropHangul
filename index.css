@@ -54,14 +54,17 @@ path {
 }
 
 .filter {
-    height: 40px;
-    width: 50px;
+    height: 42px;
+    width: 73px;
     margin: 3px;
     font-size: 12px;
     display: flex;
     text-align: center;
     justify-content: center;
     align-items: center;
+    background: url('images/filter5.svg');
+    background-size: cover;
+    /* background-size: contain; */
     cursor: pointer;
 }
 
