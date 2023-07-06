@@ -7,8 +7,80 @@
     <link rel="stylesheet" href="index.css">
 </head>
 
+<style>
+     :root {
+        --dark-color: #4F4CE3;
+        --light-color: #1DF3E6;
+    }
+    
+    svg {
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+    }
+    
+    #darkgroup {
+        fill: var(--dark-color);
+    }
+    
+    #lightgroup {
+        fill: var(--light-color);
+    }
+    
+    #dark1,
+    #light1,
+    #dark2 {
+        transition: all 1s ease;
+    }
+    
+    #dark1 {
+        transform: translateX(-100%);
+    }
+    
+    svg:hover #light1 {
+        transform: translateX(20%);
+    }
+    
+    svg:hover #dark2 {
+        transform: translateX(40%);
+        opacity: 0;
+    }
+    
+    svg:hover #dark1 {
+        transform: translateX(0%);
+    }
+</style>
+
+
 <body id="body">
     <div id="menuScreen"></div>
+    <!-- <svg width="364" height="364" viewBox="0 0 364 364" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g id="Triangles" clip-path="url(#clip0_1_2)">
+        <g id="lightgroup">
+        <path id="light1" opacity="0.7" d="M126.764 176.281C130.882 178.557 130.898 184.471 126.792 186.768L23.0408 244.825C19.0475 247.059 14.1231 244.181 14.1109 239.605L13.8047 124.043C13.7926 119.467 18.7017 116.562 22.7069 118.775L126.764 176.281Z"/>
+        </g>
+        <g id="darkgroup">
+        <path id="dark2" opacity="0.7" d="M194.764 176.281C198.882 178.557 198.898 184.471 194.792 186.768L91.0408 244.825C87.0475 247.059 82.1231 244.181 82.1109 239.605L81.8047 124.043C81.7926 119.467 86.7017 116.562 90.7069 118.775L194.764 176.281Z"/>
+        <path id="dark1" opacity="0.7" d="M126.764 176.281C130.882 178.557 130.898 184.471 126.792 186.768L23.0408 244.825C19.0475 247.059 14.1231 244.181 14.1109 239.605L13.8047 124.043C13.7926 119.467 18.7017 116.562 22.7069 118.775L126.764 176.281Z"/>
+        </g>
+        </g>
+        <defs>
+        <clipPath id="clip0_1_2">
+        <rect width="364" height="364" fill="white"/>
+        </clipPath>
+        </defs>
+     </svg>
+    <script>
+        const svg = document.getElementById('Triangles');
+        svg.onclick = (e) => {
+            const colors = ['red', 'blue', 'green', 'orange', 'pink', 'purple'];
+            const rando = () => colors[Math.floor(Math.random() * colors.length)];
+            document.documentElement.style.cssText = `
+            --dark-color:${rando()};
+            --light-color:${rando()};
+            `
+        }
+    </script> -->
 
     <script src="blocksLetters.js"></script>
     <script src="app.js"></script>
