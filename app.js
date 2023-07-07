@@ -21,6 +21,84 @@ function removeGameBoard() {
     gameBoardElement = document.querySelector('#gameboard');
 }
 
+function createSVG(type) {
+    // this doesn't need to be a parameter it's used every time 
+    var xmlns = "http://www.w3.org/2000/svg";
+    // i think this will change so we can import
+    var boxWidth = 426;
+    var boxHeight = 33;
+
+    // this creates the svg box view element
+    var svgElem = document.createElementNS(xmlns, "svg");
+    svgElem.setAttributeNS(null, "width", boxWidth);
+    svgElem.setAttributeNS(null, "height", boxHeight);
+    svgElem.setAttributeNS(null, "viewBox", "0 0 " + boxWidth + " " + boxHeight);
+    svgElem.setAttributeNS(null, "fill", "none");
+    svgElem.style.display = "block";
+
+    // this is for grouping the elements
+    var g = document.createElementNS(xmlns, "g");
+    svgElem.appendChild(g);
+    g.setAttributeNS(null, 'opacity', '0.7');
+
+    // need an input that says what type it is and a switchcase
+    switch (type) {
+        case 'rect':
+            const rect = document.createElementNS(xmlns, "rect");
+            rect.setAttributeNS(null, "width", "426");
+            rect.setAttributeNS(null, "height", "33");
+            rect.setAttributeNS(null, "rx", "16.5");
+            rect.setAttributeNS(null, "fill", "#C8EBFF");
+            g.appendChild(rect);
+            break;
+        case 'path':
+            break;
+        case 'circle':
+            break;
+        default:
+            break;
+    }
+
+    // draw linear gradient
+    // var defs = document.createElementNS(xmlns, "defs");
+    // var grad = document.createElementNS(xmlns, "linearGradient");
+    // grad.setAttributeNS(null, "id", "gradient");
+    // grad.setAttributeNS(null, "x1", "0%");
+    // grad.setAttributeNS(null, "x2", "0%");
+    // grad.setAttributeNS(null, "y1", "100%");
+    // grad.setAttributeNS(null, "y2", "0%");
+    // var stopTop = document.createElementNS(xmlns, "stop");
+    // stopTop.setAttributeNS(null, "offset", "0%");
+    // stopTop.setAttributeNS(null, "stop-color", "#ff0000");
+    // grad.appendChild(stopTop);
+    // var stopBottom = document.createElementNS(xmlns, "stop");
+    // stopBottom.setAttributeNS(null, "offset", "100%");
+    // stopBottom.setAttributeNS(null, "stop-color", "#0000ff");
+    // grad.appendChild(stopBottom);
+    // defs.appendChild(grad);
+    // g.appendChild(defs);
+
+    // draw borders
+    // var coords = "M 0, 0";
+    // coords += " l 0, 300";
+    // coords += " l 300, 0";
+    // coords += " l 0, -300";
+    // coords += " l -300, 0";
+
+    // var path = document.createElementNS(xmlns, "path");
+    // path.setAttributeNS(null, 'stroke', "#000000");
+    // path.setAttributeNS(null, 'stroke-width', 10);
+    // path.setAttributeNS(null, 'stroke-linejoin', "round");
+    // path.setAttributeNS(null, 'd', coords);
+    // path.setAttributeNS(null, 'fill', "url(#gradient)");
+    // path.setAttributeNS(null, 'opacity', 1.0);
+    // g.appendChild(path);
+
+    // var svgContainer = document.getElementById("svgContainer");
+    // svgContainer.appendChild(svgElem);
+    return svgElem;
+}
+
 function createGameBoard(input) {
     let gameBoard;
     // creating main board
@@ -55,6 +133,8 @@ function createGameBoard(input) {
 
     const footer = document.createElement('div');
     footer.setAttribute('id', 'footer');
+    const test = createSVG('rect');
+    footer.append(test);
     gameBoardElement.append(footer);
 
     createFooterSection();

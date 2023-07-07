@@ -1,8 +1,13 @@
 #gameboard {
     width: 560px;
-    height: 650px;
+    height: 665px;
     /* background-image: url('images/gameBackground.svg'); */
     background-size: cover;
+    background-color: #293780;
+}
+
+svg {
+    z-index: -10;
 }
 
 html {
@@ -42,19 +47,25 @@ path {
 
 #topBoard {
     height: 220px;
-    padding: 33px 12px 0 12px;
+    padding: 5px 20px 5px 20px;
     display: flex;
+    background: url('images/starbackground.svg');
     flex-wrap: wrap;
+    background-repeat: round;
 }
 
 #bottomBoard {
+    background: url('images/cloud.svg');
+    background-repeat: no-repeat;
     height: 250px;
     display: flex;
+    background-repeat: round;
+    margin: 20px 10px 0 10px;
     flex-wrap: wrap;
 }
 
 .filter {
-    height: 42px;
+    height: 45px;
     width: 73px;
     margin: 3px;
     font-size: 12px;
@@ -63,13 +74,13 @@ path {
     justify-content: center;
     align-items: center;
     background: url('images/filter5.svg');
-    background-size: cover;
-    /* background-size: contain; */
+    background-repeat: no-repeat;
+    background-size: contain;
     cursor: pointer;
 }
 
 #filterSection {
-    height: 50px;
+    height: 60px;
     display: flex;
     flex-wrap: wrap;
     padding: 0 8px 0 8px;
@@ -88,9 +99,14 @@ div[draggable="true"] {
 .hangul {
     font-weight: bold;
     font-size: 30px;
+    height: 35px;
+    width: 35px;
+    margin: 8px;
+    background: url('images/Star.svg');
 }
 
 #header {
+    /* background-image: url('images/header.svg'); */
     display: flex;
     justify-content: center;
     color: white;
@@ -99,7 +115,7 @@ div[draggable="true"] {
 }
 
 #menuScreen {
-    background-color: rgba(43, 43, 43, 0.213);
+    background-color: #293780;
     height: 650px;
     width: 500px;
     display: flex;
@@ -109,19 +125,21 @@ div[draggable="true"] {
 }
 
 #footer {
-    /* background-color: rgba(43, 43, 43, 0.213); */
-    height: 60px;
-    width: inherit;
+    height: 50px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    /* background-image: url(images/footer.svg);
+    background-repeat: space;
+    background-size: contain; */
+    margin: 0 10px 0 10px;
 }
 
 .options {
-    /* background-color: aliceblue; */
     margin: 30px;
     font-size: 20px;
+    color: white;
     font-weight: bold;
     padding: 20px;
     cursor: pointer;
