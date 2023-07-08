@@ -21,12 +21,8 @@ function removeGameBoard() {
     gameBoardElement = document.querySelector('#gameboard');
 }
 
-function createSVG(type) {
-    // this doesn't need to be a parameter it's used every time 
+function createSVG(type, boxWidth, boxHeight, color, rx) {
     var xmlns = "http://www.w3.org/2000/svg";
-    // i think this will change so we can import
-    var boxWidth = 525;
-    var boxHeight = 40;
 
     // this creates the svg box view element
     var svgElem = document.createElementNS(xmlns, "svg");
@@ -42,15 +38,14 @@ function createSVG(type) {
     svgElem.appendChild(g);
     g.setAttributeNS(null, 'opacity', '0.7');
 
-    // need an input that says what type it is and a switchcase
+
     switch (type) {
         case 'rect':
             const rect = document.createElementNS(xmlns, "rect");
-            rect.setAttributeNS(null, "width", "525");
-            rect.setAttributeNS(null, "height", "40");
-            rect.setAttributeNS(null, "rx", "16.5");
-            rect.setAttributeNS(null, "ry", "16.5");
-            rect.setAttributeNS(null, "fill", "#C8EBFF");
+            rect.setAttributeNS(null, "width", boxWidth);
+            rect.setAttributeNS(null, "height", boxHeight);
+            rect.setAttributeNS(null, "rx", rx);
+            rect.setAttributeNS(null, "fill", color);
             g.appendChild(rect);
             break;
         case 'path':
@@ -135,7 +130,7 @@ function createGameBoard(input) {
 
     const footer = document.createElement('div');
     footer.setAttribute('id', 'footer');
-    const test = createSVG('rect');
+    const test = createSVG('rect', 525, 40, "#C8EBFF", 16.5);
     footer.append(test);
     gameBoardElement.append(footer);
 
@@ -162,7 +157,8 @@ function createFilterSection() {
 
     allFilters.forEach(filter => {
         filter.addEventListener('click', clickFilter);
-        // filter.insertAdjacentHTML('beforebegin', '<svg width="60" height="35" viewBox="0 0 60 35" fill="none" xmlns="http://www.w3.org/2000/svg"><g opacity="0.7"><rect width="60" height="35" rx="17.5" fill="#C8EBFF"/><rect width="60" height="35" rx="17.5" fill="#C8EBFF"/></g></svg>');
+        const filterSVG = createSVG('rect', 70, 45, "#C8EBFF", 22.5);
+        filter.append(filterSVG);
     });
 }
 

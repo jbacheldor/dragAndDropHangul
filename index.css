@@ -7,7 +7,6 @@
     }
     
     #backgroundSvg {
-        z-index: -1;
         position: absolute;
     }
     
@@ -15,10 +14,6 @@
         z-index: 100;
         z-index: -1;
         position: relative;
-    }
-    
-    rect {
-        position: absolute;
     }
     
     html {
@@ -84,10 +79,10 @@
         text-align: center;
         justify-content: center;
         align-items: center;
-        background: url('images/filter5.svg');
         background-repeat: no-repeat;
         background-size: contain;
         cursor: pointer;
+        z-index: 1;
     }
     
     #filterSection {
