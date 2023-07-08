@@ -20,6 +20,9 @@ Website currently deployed at: https://jbacheldor.github.io/dragAndDropHangul/
 
 to-do:
 
+-bugs:
+- when you click on diphthong filter too fast it flashes for a minute all grey for all elements - it didn't happen before we added in the filter text so it's probably related to that
+
 readiability:
 - try to break elements into their own files
 

@@ -34,9 +34,9 @@ function createSVG(type, boxWidth, boxHeight, color, rx) {
     svgElem.style.display = "block";
 
     // this is for grouping the elements
-    var g = document.createElementNS(xmlns, "g");
-    svgElem.appendChild(g);
-    g.setAttributeNS(null, 'opacity', '0.7');
+    // var g = document.createElementNS(xmlns, "g");
+    // svgElem.appendChild(g);
+    // g.setAttributeNS(null, 'opacity', '0.7');
 
 
     switch (type) {
@@ -46,11 +46,19 @@ function createSVG(type, boxWidth, boxHeight, color, rx) {
             rect.setAttributeNS(null, "height", boxHeight);
             rect.setAttributeNS(null, "rx", rx);
             rect.setAttributeNS(null, "fill", color);
-            g.appendChild(rect);
+            rect.setAttributeNS(null, 'opacity', '0.7');
+            svgElem.appendChild(rect);
             break;
         case 'path':
             break;
+        case 'star':
+            const star = document.createElementNS(xmlns, "path");
+            star.setAttributeNS(null, "d", 'M15.594 1.99652C16.1848 0.137647 18.8152 0.137643 19.406 1.99652L22.1084 10.4985C22.3723 11.3287 23.1433 11.8926 24.0145 11.8926H32.8515C34.7783 11.8926 35.5908 14.3494 34.0439 15.4982L26.8196 20.8637C26.1339 21.3729 25.8473 22.2613 26.106 23.0752L28.8475 31.7002C29.4357 33.5506 27.3078 35.0693 25.749 33.9117L18.6925 28.6709C17.9844 28.145 17.0156 28.145 16.3075 28.6709L9.25097 33.9117C7.69222 35.0693 5.56431 33.5506 6.15246 31.7002L8.89399 23.0752C9.1527 22.2613 8.86605 21.3729 8.18044 20.8637L0.956048 15.4982C-0.590793 14.3494 0.221737 11.8926 2.14852 11.8926H10.9855C11.8567 11.8926 12.6277 11.3287 12.8916 10.4985L15.594 1.99652Z');
+            star.setAttributeNS(null, "fill", color);
+            svgElem.appendChild(star);
+            break;
         case 'circle':
+
             break;
         default:
             break;
@@ -152,14 +160,14 @@ function createFilterSection() {
 
     filtering(filterOptions);
 
-    const allFilters = document.querySelectorAll("#gameboard .filter");
+    const allFilters = document.querySelectorAll("#gameboard .filterText");
 
 
     allFilters.forEach(filter => {
         filter.addEventListener('click', clickFilter);
         // maybe come back to this and do something incrementally 
         const filterSVG = createSVG('rect', 70, 45, "#C8EBFF", 22.5);
-        filter.append(filterSVG);
+        filter.parentNode.append(filterSVG);
     });
 }
 
@@ -268,6 +276,7 @@ let romanjiOptions = [
     "Both"
 ]
 
+
 romanjiOptions.forEach((option) => {
     const button = document.createElement('div');
     button.classList.add('options');
@@ -304,18 +313,21 @@ function filtering(options) {
     const filterSection = document.querySelector("#filterSection");
     options.forEach((filterOption) => {
         const filter = document.createElement('div');
-        filter.innerHTML = filterOption;
         filter.classList.add('filter');
-        filter.setAttribute('canChangeFilter', true);
-        filter.setAttribute('filterType', filterOption);
-        filter.setAttribute('filterOn', false);
+        const filterText = document.createElement('div');
+        filterText.classList.add('filterText');
+        filterText.setAttribute('canChangeFilter', true);
+        filterText.setAttribute('filterType', filterOption);
+        filterText.setAttribute('filterOn', false);
+        filterText.innerHTML = filterOption;
+        filter.append(filterText);
         filterSection.append(filter);
     })
 }
 
 
 function clickFilter(e) {
-    const type = e.target.getAttribute('filtertype');
+    var type = e.target.getAttribute('filtertype');
     const string = "[type=\"" + type + "\"]";
     if (e.target.getAttribute('filteron') === "false") {
         e.target.setAttribute('filteron', true);
@@ -409,6 +421,7 @@ function createTopBoard() {
         const block = document.createElement('div');
         block.classList.add('block');
         block.classList.add('hangul');
+        // need to come in here and do this for a few others i think
         if (optionSelected === "Final" && romanji.includes('t')) {
             block.setAttribute('answer', "t");
         } else {
@@ -417,6 +430,8 @@ function createTopBoard() {
         if (hangulLetterElement != undefined) { block.innerHTML = hangulLetterElement; }
         if (classification != null) { block.setAttribute('type', classification) };
         block.setAttribute('id', romanji);
+        const star = createSVG('star', 35, 35, "#F5E12A", 0);
+        block.append(star);
         gameTopBoard.append(block);
     })
 }
