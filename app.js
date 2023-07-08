@@ -25,8 +25,8 @@ function createSVG(type) {
     // this doesn't need to be a parameter it's used every time 
     var xmlns = "http://www.w3.org/2000/svg";
     // i think this will change so we can import
-    var boxWidth = 426;
-    var boxHeight = 33;
+    var boxWidth = 525;
+    var boxHeight = 40;
 
     // this creates the svg box view element
     var svgElem = document.createElementNS(xmlns, "svg");
@@ -34,6 +34,7 @@ function createSVG(type) {
     svgElem.setAttributeNS(null, "height", boxHeight);
     svgElem.setAttributeNS(null, "viewBox", "0 0 " + boxWidth + " " + boxHeight);
     svgElem.setAttributeNS(null, "fill", "none");
+    svgElem.setAttributeNS(null, "id", "backgroundSvg");
     svgElem.style.display = "block";
 
     // this is for grouping the elements
@@ -45,9 +46,10 @@ function createSVG(type) {
     switch (type) {
         case 'rect':
             const rect = document.createElementNS(xmlns, "rect");
-            rect.setAttributeNS(null, "width", "426");
-            rect.setAttributeNS(null, "height", "33");
+            rect.setAttributeNS(null, "width", "525");
+            rect.setAttributeNS(null, "height", "40");
             rect.setAttributeNS(null, "rx", "16.5");
+            rect.setAttributeNS(null, "ry", "16.5");
             rect.setAttributeNS(null, "fill", "#C8EBFF");
             g.appendChild(rect);
             break;
@@ -167,6 +169,8 @@ function createFilterSection() {
 function createFooterSection() {
     // create the footer
     const footer = document.querySelector("#footer");
+    const iconWrapper = document.createElement('div');
+    iconWrapper.setAttribute('id', 'iconWrapper');
     // populate the footer icons
     Icons.forEach((icons) => {
         const { iconElement } = icons;
@@ -174,8 +178,9 @@ function createFooterSection() {
         icon.innerHTML = iconElement;
         icon.firstChild.classList.add('icon');
         icon.classList.add('footerIcon');
-        footer.append(icon);
+        iconWrapper.append(icon);
     })
+    footer.append(iconWrapper);
 
     gameBoardElement.append(footer);
     const footerIcons = document.querySelectorAll("#gameboard .icon");
