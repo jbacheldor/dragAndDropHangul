@@ -7,7 +7,7 @@ let footer;
 var Interval;
 var seconds = 00;
 var tens = 00;
-var mins = 59;
+var mins = 00;
 
 // 40 letters in total 
 const width = 8;
@@ -19,6 +19,90 @@ let gameStarted = false;
 function removeGameBoard() {
     document.querySelector('#gameboard').remove();
     gameBoardElement = document.querySelector('#gameboard');
+}
+
+function createSVG(type, boxWidth, boxHeight, color, rx, className) {
+    var xmlns = "http://www.w3.org/2000/svg";
+
+    // this creates the svg box view element
+    var svgElem = document.createElementNS(xmlns, "svg");
+    svgElem.setAttributeNS(null, "width", boxWidth);
+    svgElem.setAttributeNS(null, "height", boxHeight);
+    svgElem.setAttributeNS(null, "viewBox", "0 0 " + boxWidth + " " + boxHeight);
+    svgElem.setAttributeNS(null, "fill", "none");
+    svgElem.setAttributeNS(null, "id", "backgroundSvg");
+    svgElem.setAttributeNS(null, "class", className);
+    svgElem.style.display = "block";
+
+    // this is for grouping the elements
+    // var g = document.createElementNS(xmlns, "g");
+    // svgElem.appendChild(g);
+    // g.setAttributeNS(null, 'opacity', '0.7');
+
+
+    switch (type) {
+        case 'rect':
+            const rect = document.createElementNS(xmlns, "rect");
+            rect.setAttributeNS(null, "width", boxWidth);
+            rect.setAttributeNS(null, "height", boxHeight);
+            rect.setAttributeNS(null, "rx", rx);
+            rect.setAttributeNS(null, "fill", color);
+            rect.setAttributeNS(null, 'opacity', '0.7');
+            svgElem.appendChild(rect);
+            break;
+        case 'path':
+            break;
+        case 'star':
+            const star = document.createElementNS(xmlns, "path");
+            star.setAttributeNS(null, "d", 'M19.6958 3.70821C20.8932 0.0229664 26.1068 0.0229616 27.3042 3.7082L29.8986 11.693C30.4341 13.3411 31.97 14.4569 33.7029 14.4569H42.0986C45.9735 14.4569 47.5846 19.4154 44.4497 21.693L37.6575 26.6279C36.2555 27.6465 35.6689 29.4519 36.2044 31.1L38.7988 39.0848C39.9962 42.7701 35.7783 45.8346 32.6434 43.557L25.8511 38.6221C24.4492 37.6035 22.5508 37.6035 21.1489 38.6221L14.3566 43.557C11.2217 45.8346 7.0038 42.7701 8.20121 39.0848L10.7956 31.1C11.3311 29.4519 10.7445 27.6465 9.34254 26.6279L2.55026 21.693C-0.584595 19.4154 1.0265 14.4569 4.9014 14.4569H13.2971C15.03 14.4569 16.5659 13.3411 17.1014 11.693L19.6958 3.70821Z');
+            star.setAttributeNS(null, "fill", color);
+            svgElem.appendChild(star);
+            break;
+        case 'circle':
+
+            break;
+        default:
+            break;
+    }
+
+    // draw linear gradient
+    // var defs = document.createElementNS(xmlns, "defs");
+    // var grad = document.createElementNS(xmlns, "linearGradient");
+    // grad.setAttributeNS(null, "id", "gradient");
+    // grad.setAttributeNS(null, "x1", "0%");
+    // grad.setAttributeNS(null, "x2", "0%");
+    // grad.setAttributeNS(null, "y1", "100%");
+    // grad.setAttributeNS(null, "y2", "0%");
+    // var stopTop = document.createElementNS(xmlns, "stop");
+    // stopTop.setAttributeNS(null, "offset", "0%");
+    // stopTop.setAttributeNS(null, "stop-color", "#ff0000");
+    // grad.appendChild(stopTop);
+    // var stopBottom = document.createElementNS(xmlns, "stop");
+    // stopBottom.setAttributeNS(null, "offset", "100%");
+    // stopBottom.setAttributeNS(null, "stop-color", "#0000ff");
+    // grad.appendChild(stopBottom);
+    // defs.appendChild(grad);
+    // g.appendChild(defs);
+
+    // draw borders
+    // var coords = "M 0, 0";
+    // coords += " l 0, 300";
+    // coords += " l 300, 0";
+    // coords += " l 0, -300";
+    // coords += " l -300, 0";
+
+    // var path = document.createElementNS(xmlns, "path");
+    // path.setAttributeNS(null, 'stroke', "#000000");
+    // path.setAttributeNS(null, 'stroke-width', 10);
+    // path.setAttributeNS(null, 'stroke-linejoin', "round");
+    // path.setAttributeNS(null, 'd', coords);
+    // path.setAttributeNS(null, 'fill', "url(#gradient)");
+    // path.setAttributeNS(null, 'opacity', 1.0);
+    // g.appendChild(path);
+
+    // var svgContainer = document.getElementById("svgContainer");
+    // svgContainer.appendChild(svgElem);
+    return svgElem;
 }
 
 function createGameBoard(input) {
@@ -55,6 +139,8 @@ function createGameBoard(input) {
 
     const footer = document.createElement('div');
     footer.setAttribute('id', 'footer');
+    const test = createSVG('rect', 525, 40, "#C8EBFF", 16.5);
+    footer.append(test);
     gameBoardElement.append(footer);
 
     createFooterSection();
@@ -75,16 +161,22 @@ function createFilterSection() {
 
     filtering(filterOptions);
 
-    const allFilters = document.querySelectorAll("#gameboard .filter");
+    const allFilters = document.querySelectorAll("#gameboard .filterText");
+
 
     allFilters.forEach(filter => {
         filter.addEventListener('click', clickFilter);
+        // maybe come back to this and do something incrementally 
+        const filterSVG = createSVG('rect', 70, 45, "#C8EBFF", 22.5, "filterSvg");
+        filter.parentNode.append(filterSVG);
     });
 }
 
 function createFooterSection() {
     // create the footer
     const footer = document.querySelector("#footer");
+    const iconWrapper = document.createElement('div');
+    iconWrapper.setAttribute('id', 'iconWrapper');
     // populate the footer icons
     Icons.forEach((icons) => {
         const { iconElement } = icons;
@@ -92,8 +184,9 @@ function createFooterSection() {
         icon.innerHTML = iconElement;
         icon.firstChild.classList.add('icon');
         icon.classList.add('footerIcon');
-        footer.append(icon);
+        iconWrapper.append(icon);
     })
+    footer.append(iconWrapper);
 
     gameBoardElement.append(footer);
     const footerIcons = document.querySelectorAll("#gameboard .icon");
@@ -184,6 +277,7 @@ let romanjiOptions = [
     "Both"
 ]
 
+
 romanjiOptions.forEach((option) => {
     const button = document.createElement('div');
     button.classList.add('options');
@@ -220,18 +314,21 @@ function filtering(options) {
     const filterSection = document.querySelector("#filterSection");
     options.forEach((filterOption) => {
         const filter = document.createElement('div');
-        filter.innerHTML = filterOption;
         filter.classList.add('filter');
-        filter.setAttribute('canChangeFilter', true);
-        filter.setAttribute('filterType', filterOption);
-        filter.setAttribute('filterOn', false);
+        const filterText = document.createElement('div');
+        filterText.classList.add('filterText');
+        filterText.setAttribute('canChangeFilter', true);
+        filterText.setAttribute('filterType', filterOption);
+        filterText.setAttribute('filterOn', false);
+        filterText.innerHTML = filterOption;
+        filter.append(filterText);
         filterSection.append(filter);
     })
 }
 
 
 function clickFilter(e) {
-    const type = e.target.getAttribute('filtertype');
+    var type = e.target.getAttribute('filtertype');
     const string = "[type=\"" + type + "\"]";
     if (e.target.getAttribute('filteron') === "false") {
         e.target.setAttribute('filteron', true);
@@ -280,6 +377,7 @@ function createBottomBoard() {
                 block.classList.add('block');
                 block.classList.add('romanji');
                 if (romanjiInitialLetter != undefined) { block.innerHTML = romanjiInitialLetter; }
+                block.firstChild.classList.add('answer');
                 block.setAttribute('draggable', true);
                 block.setAttribute('id', romanji);
                 gameBottomBoard.append(block);
@@ -292,6 +390,7 @@ function createBottomBoard() {
                 block.classList.add('block');
                 block.classList.add('romanji');
                 if (romanjiFinalLetter != undefined) { block.innerHTML = romanjiFinalLetter; }
+                block.firstChild.classList.add('answer');
                 block.setAttribute('draggable', true);
                 if (optionSelected === "Final" && romanji.includes('t')) {
                     block.setAttribute('id', "t");
@@ -308,6 +407,7 @@ function createBottomBoard() {
                 block.classList.add('block');
                 block.classList.add('romanji');
                 if (romanjiBothLetter != undefined) { block.innerHTML = romanjiBothLetter; }
+                block.firstChild.classList.add('answer');
                 block.setAttribute('draggable', true);
                 block.setAttribute('id', romanji);
                 gameBottomBoard.append(block);
@@ -322,6 +422,7 @@ function createTopBoard() {
         const block = document.createElement('div');
         block.classList.add('block');
         block.classList.add('hangul');
+        // need to come in here and do this for a few others i think
         if (optionSelected === "Final" && romanji.includes('t')) {
             block.setAttribute('answer', "t");
         } else {
@@ -330,6 +431,8 @@ function createTopBoard() {
         if (hangulLetterElement != undefined) { block.innerHTML = hangulLetterElement; }
         if (classification != null) { block.setAttribute('type', classification) };
         block.setAttribute('id', romanji);
+        const star = createSVG('star', 47, 45, "#F5E12A", 0);
+        block.append(star);
         gameTopBoard.append(block);
     })
 }
