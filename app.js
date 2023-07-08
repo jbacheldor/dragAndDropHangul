@@ -157,6 +157,7 @@ function createFilterSection() {
 
     allFilters.forEach(filter => {
         filter.addEventListener('click', clickFilter);
+        // maybe come back to this and do something incrementally 
         const filterSVG = createSVG('rect', 70, 45, "#C8EBFF", 22.5);
         filter.append(filterSVG);
     });

@@ -112,7 +112,10 @@
     }
     
     #header {
-        /* background-image: url('images/header.svg'); */
+        background-image: url('images/header.svg');
+        background-repeat: round;
+        background-size: contain;
+        margin: 0 10px;
         display: flex;
         justify-content: center;
         color: white;
