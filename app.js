@@ -21,7 +21,7 @@ function removeGameBoard() {
     gameBoardElement = document.querySelector('#gameboard');
 }
 
-function createSVG(type, boxWidth, boxHeight, color, rx) {
+function createSVG(type, boxWidth, boxHeight, color, rx, className) {
     var xmlns = "http://www.w3.org/2000/svg";
 
     // this creates the svg box view element
@@ -31,6 +31,7 @@ function createSVG(type, boxWidth, boxHeight, color, rx) {
     svgElem.setAttributeNS(null, "viewBox", "0 0 " + boxWidth + " " + boxHeight);
     svgElem.setAttributeNS(null, "fill", "none");
     svgElem.setAttributeNS(null, "id", "backgroundSvg");
+    svgElem.setAttributeNS(null, "class", className);
     svgElem.style.display = "block";
 
     // this is for grouping the elements
@@ -53,7 +54,7 @@ function createSVG(type, boxWidth, boxHeight, color, rx) {
             break;
         case 'star':
             const star = document.createElementNS(xmlns, "path");
-            star.setAttributeNS(null, "d", 'M15.594 1.99652C16.1848 0.137647 18.8152 0.137643 19.406 1.99652L22.1084 10.4985C22.3723 11.3287 23.1433 11.8926 24.0145 11.8926H32.8515C34.7783 11.8926 35.5908 14.3494 34.0439 15.4982L26.8196 20.8637C26.1339 21.3729 25.8473 22.2613 26.106 23.0752L28.8475 31.7002C29.4357 33.5506 27.3078 35.0693 25.749 33.9117L18.6925 28.6709C17.9844 28.145 17.0156 28.145 16.3075 28.6709L9.25097 33.9117C7.69222 35.0693 5.56431 33.5506 6.15246 31.7002L8.89399 23.0752C9.1527 22.2613 8.86605 21.3729 8.18044 20.8637L0.956048 15.4982C-0.590793 14.3494 0.221737 11.8926 2.14852 11.8926H10.9855C11.8567 11.8926 12.6277 11.3287 12.8916 10.4985L15.594 1.99652Z');
+            star.setAttributeNS(null, "d", 'M19.6958 3.70821C20.8932 0.0229664 26.1068 0.0229616 27.3042 3.7082L29.8986 11.693C30.4341 13.3411 31.97 14.4569 33.7029 14.4569H42.0986C45.9735 14.4569 47.5846 19.4154 44.4497 21.693L37.6575 26.6279C36.2555 27.6465 35.6689 29.4519 36.2044 31.1L38.7988 39.0848C39.9962 42.7701 35.7783 45.8346 32.6434 43.557L25.8511 38.6221C24.4492 37.6035 22.5508 37.6035 21.1489 38.6221L14.3566 43.557C11.2217 45.8346 7.0038 42.7701 8.20121 39.0848L10.7956 31.1C11.3311 29.4519 10.7445 27.6465 9.34254 26.6279L2.55026 21.693C-0.584595 19.4154 1.0265 14.4569 4.9014 14.4569H13.2971C15.03 14.4569 16.5659 13.3411 17.1014 11.693L19.6958 3.70821Z');
             star.setAttributeNS(null, "fill", color);
             svgElem.appendChild(star);
             break;
@@ -166,7 +167,7 @@ function createFilterSection() {
     allFilters.forEach(filter => {
         filter.addEventListener('click', clickFilter);
         // maybe come back to this and do something incrementally 
-        const filterSVG = createSVG('rect', 70, 45, "#C8EBFF", 22.5);
+        const filterSVG = createSVG('rect', 70, 45, "#C8EBFF", 22.5, "filterSvg");
         filter.parentNode.append(filterSVG);
     });
 }
@@ -430,7 +431,7 @@ function createTopBoard() {
         if (hangulLetterElement != undefined) { block.innerHTML = hangulLetterElement; }
         if (classification != null) { block.setAttribute('type', classification) };
         block.setAttribute('id', romanji);
-        const star = createSVG('star', 35, 35, "#F5E12A", 0);
+        const star = createSVG('star', 47, 45, "#F5E12A", 0);
         block.append(star);
         gameTopBoard.append(block);
     })
