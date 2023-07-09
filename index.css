@@ -10,6 +10,16 @@
         position: absolute;
     }
     
+    .menuText {
+        z-index: 3;
+        position: absolute;
+        padding: 15px 70px;
+    }
+    
+    .menuOption {
+        z-index: 1;
+    }
+    
     svg {
         z-index: 100;
         z-index: -1;
@@ -73,7 +83,7 @@
     }
     
     .filterText:hover~.filterSvg {
-        animation: expand-filter 1000ms;
+        animation: expand-filter 1000ms infinite;
     }
     
     .filter {
@@ -161,12 +171,15 @@
     }
     
     .options {
-        margin: 34px;
+        margin: 45px;
         font-size: 20px;
         color: white;
         font-weight: bold;
         padding: 20px;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     div [canChangeFilter="false"] {

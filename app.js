@@ -271,17 +271,20 @@ function iconClick(e) {
     }
 }
 
-let romanjiOptions = [
+let menuOptionsList = [
     "Initial",
     "Final",
     "Both"
 ]
 
 
-romanjiOptions.forEach((option) => {
+menuOptionsList.forEach((option) => {
     const button = document.createElement('div');
     button.classList.add('options');
-    button.innerHTML = option;
+    const menuText = document.createElement('div');
+    menuText.classList.add('menuText');
+    menuText.innerHTML = option;
+    button.append(menuText);
     menuScreen.append(button);
 })
 
@@ -289,6 +292,8 @@ const menuOptions = document.querySelectorAll("#menuScreen .options");
 
 menuOptions.forEach(block => {
     block.addEventListener('click', startGame);
+    const filterSVG = createSVG('rect', 199, 57, "#C8EBFF", 28.5, "menuOption");
+    block.append(filterSVG);
 });
 
 let input;
