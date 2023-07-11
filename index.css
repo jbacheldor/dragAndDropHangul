@@ -1,7 +1,6 @@
     #gameboard {
         width: 560px;
         height: 665px;
-        /* background-image: url('images/gameBackground.svg'); */
         background-size: cover;
         background-color: #293780;
     }

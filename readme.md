@@ -20,6 +20,9 @@ Website currently deployed at: https://jbacheldor.github.io/dragAndDropHangul/
 
 to-do:
 
+bugs:
+- when you try to add "ng" onto the element it adds instead of replacing & same w/ "eo" on the initial screen & "yeo"
+
 readiability:
 - try to break elements into their own files
 
@@ -29,17 +32,15 @@ features:
 
 small things:
 - remove the character from mapping - not being used
+- would it be better to use blocks for the components to ensure people know where to click?
 - change the clickable component in the blocks to be something else - like is active
 - the body is weird and not sized properly to match the elements
-- change overall sizing so scroll isn't needed
+- menu and background body are not the same size !!
 - the home button is changing every so slightly as the counter goes 
 - the filter inactive shows the same as when the game start and is frozen. makes it hard to know what is running
 - there are still some repeats on letting (besides the 't' that cause issues) - p (final) - is ss final accurate ?
-- also now with the addition of the blocks. the background is pulling now too
-- the dropping is finicky  
-- when the bottom board is empty the timer should stop - but also needs to stop even with the greyed out ones too       - maybe once all of the values of a specific type on top that aren't unclickable are of type letter
-
-
-background:
-- home screen
-- menu screen
+- using text instead of pictures causes blocks to be higlighted as you move it. can this be fixed
+- the dropping is finicky - maybe increase the drop area to ensure ease of us 
+- when the bottom board is empty the timer should stop - but also needs to stop even with the greyed out ones too - maybe lil fireworks on completion    
+ - maybe once all of the values of a specific type on top that aren't unclickable are of type letter
+- i want the stars on the menu to use keyframe animations but at different times 
