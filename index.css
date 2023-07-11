@@ -1,13 +1,28 @@
     #gameboard {
         width: 560px;
         height: 665px;
-        /* background-image: url('images/gameBackground.svg'); */
         background-size: cover;
         background-color: #293780;
     }
     
     #backgroundSvg {
         position: absolute;
+    }
+    
+    #backgroundStarSvg {
+        position: absolute;
+        z-index: 1;
+        left: 20px;
+    }
+    
+    .menuText {
+        z-index: 3;
+        position: absolute;
+        padding: 15px 70px;
+    }
+    
+    .menuOption {
+        z-index: 1;
     }
     
     svg {
@@ -68,12 +83,30 @@
         height: 250px;
         display: flex;
         background-repeat: round;
-        margin: 20px 10px 0 10px;
+        margin: 5px 20px 5px 20px;
+        justify-content: center;
+        align-items: center;
+        /* margin: 20px 10px 0 10px; */
         flex-wrap: wrap;
     }
     
+    .options:hover~#backgroundStarSvg {
+        animation: move-stars 1000ms;
+    }
+    /* .options:hover~.backgroundStarSvg2 {
+        animation: move-stars 1000ms;
+    }
+    
+    .options:hover~.backgroundStarSvg3 {
+        animation: move-stars 1000ms;
+    } */
+    
+    .menuText:hover~.menuOption {
+        animation: expand-filter 1000ms infinite;
+    }
+    
     .filterText:hover~.filterSvg {
-        animation: expand-filter 1000ms;
+        animation: expand-filter 1000ms infinite;
     }
     
     .filter {
@@ -108,6 +141,15 @@
         cursor: pointer;
     }
     
+    .romanji {
+        font-size: 25px;
+        justify-content: space-evenly;
+        align-items: center;
+        height: 35px;
+        width: 35px;
+        margin: 8px;
+    }
+    
     .hangul {
         font-weight: bold;
         font-size: 25px;
@@ -137,6 +179,7 @@
         height: 650px;
         width: 500px;
         display: flex;
+        position: relative;
         justify-content: center;
         align-items: center;
         flex-direction: column;
@@ -160,13 +203,21 @@
         flex-direction: row;
     }
     
+    #menuStarsGroup {
+        z-index: 10;
+        position: absolute;
+    }
+    
     .options {
-        margin: 34px;
+        margin: 45px;
         font-size: 20px;
-        color: white;
+        color: black;
         font-weight: bold;
         padding: 20px;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     div [canChangeFilter="false"] {
@@ -212,5 +263,14 @@
         }
         100% {
             transform: scale(1.10);
+        }
+    }
+    
+    @keyframes move-stars {
+        to {
+            transform: rotate(30deg) translateY(-100%);
+        }
+        from {
+            transform: rotate(0deg) translateY(0%);
         }
     }
