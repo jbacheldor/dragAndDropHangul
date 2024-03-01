@@ -116,10 +116,6 @@ function createGameBoard(input) {
         block.addEventListener('drop', dragDrop);
     });
 
-    // or you could calculate how many available ones there are at the start 
-    // and subtract them each time as u go ????
-    // that might be easier than monitoring 
-
     gameTopBoard.addEventListener('', gameEndCheck);
 }
 
@@ -132,7 +128,6 @@ function createFilterSection() {
 
     allFilters.forEach(filter => {
         filter.addEventListener('click', clickFilter);
-        // maybe come back to this and do something incrementally 
         const filterSVG = createSVG('rect', 70, 45, "#C8EBFF", 22.5, "filterSvg");
         filter.parentNode.append(filterSVG);
     });
@@ -165,6 +160,7 @@ function createFooterSection() {
 function reset() {
     gameStarted = false;
     remainingPieces = 0;
+    totalPieces = 0;
     removeGameBoard();
     createGameBoard(input);
 }
@@ -352,14 +348,14 @@ function clickFilter(e) {
         const result = document.querySelectorAll(string);
         result.forEach(res => {
             res.parentNode.setAttribute('draggable', false);
-            res.setAttribute('clickable', false);
+            res.setAttribute('isActive', false);
         })
     } else {
         e.target.setAttribute('filteron', false);
         // e.target.parentNode.setAttribute('filteron', false);
         const result = document.querySelectorAll(string);
         result.forEach(res => {
-            res.setAttribute('clickable', true);
+            res.setAttribute('isActive', true);
             res.parentNode.setAttribute('draggable', true);
         })
     }
@@ -410,8 +406,12 @@ function createBottomBoard() {
                 if (romanjiFinalLetter != undefined) { block.innerHTML = romanjiFinalLetter; }
                 block.firstChild.classList.add('answer');
                 block.setAttribute('draggable', true);
-                if (optionSelected === "Final" && romanji.includes('t')) {
+                if (romanji.includes('t')) {
                     block.setAttribute('id', "t");
+                } else if (romanji.includes('p')) {
+                    block.setAttribute('id', "p");
+                } else if (romanji.includes('k')) {
+                    block.setAttribute('id', "k");
                 } else {
                     block.setAttribute('id', romanji);
                 }
@@ -440,10 +440,13 @@ function createTopBoard() {
         const block = document.createElement('div');
         block.classList.add('block');
         block.classList.add('hangul');
-        block.setAttribute('clickable', true);
-        // need to come in here and do this for a few others i think
+        block.setAttribute('isActive', true);
         if (optionSelected === "Final" && romanji.includes('t')) {
             block.setAttribute('answer', "t");
+        } else if (optionSelected === "Final" && romanji.includes('k')) {
+            block.setAttribute('answer', "k");
+        } else if (optionSelected === "Final" && romanji.includes('p')) {
+            block.setAttribute('answer', "p");
         } else {
             block.setAttribute('answer', romanji);
         }
@@ -455,12 +458,13 @@ function createTopBoard() {
         gameTopBoard.append(block);
     })
 }
+
 let dragStartPosition;
 let draggedElement;
 
 function GameStarted() {
     gameStarted = true;
-    totalPieces = document.querySelectorAll('div[clickable=true]').length;
+    totalPieces = document.querySelectorAll('div[isActive=true]').length;
     startTimer();
     const filter = document.querySelectorAll(".filter");
     filter.forEach((filters) => {
@@ -497,7 +501,7 @@ function dragDrop(e) {
     e.stopPropagation();
     let draggedId = draggedElement.parentNode.getAttribute('id');
     let targetAnswer = e.target.parentNode.getAttribute('answer');
-    let isActive = e.target.getAttribute('clickable') === false;
+    let isActive = e.target.getAttribute('isActive') === false;
     if (e.target.parentNode.classList.contains('hangul') && (e.target.classList.contains('letter')) && (draggedId === targetAnswer) && (isActive === false)) {
         e.target.parentNode.append(draggedElement);
         e.target.remove();

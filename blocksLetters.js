@@ -2,10 +2,9 @@ const Alphabet = new Map([
     ["g/k", {
         "hangulLetterElement": '<div class="letter">ㄱ</div',
         "romanjiInitialLetter": '<div class="letter">g</div',
-        "romanjiFinalLetter": '<div class="letter">g</div',
+        "romanjiFinalLetter": '<div class="letter">k</div',
         "romanjiBothLetter": '<div class="letter">g/k</div',
         "classification": "Plain Consonant",
-        "character": "ㄱ",
         "romanji": "g/k",
     }],
     ["n", {
@@ -14,7 +13,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="n">n</div',
         "romanjiBothLetter": '<div class="letter" id="n">n</div',
         "classification": "Plain Consonant",
-        "character": "ㄴ",
         "romanji": "n",
     }],
     ["d/t", {
@@ -23,7 +21,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="t">t</div',
         "romanjiBothLetter": '<div class="letter" id="d/t">d/t</div',
         "classification": "Plain Consonant",
-        "character": "ㄷ",
         "romanji": "d/t",
     }],
     ["r/l", {
@@ -32,7 +29,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="l">l</div',
         "romanjiBothLetter": '<div class="letter" id="r/l">r/l</div',
         "classification": "Plain Consonant",
-        "character": "ㄹ",
         "romanji": "r/l",
     }],
     ["m", {
@@ -41,7 +37,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="m">m</div',
         "romanjiBothLetter": '<div class="letter" id="m">m</div',
         "classification": "Plain Consonant",
-        "character": "ㅁ",
         "romanji": "m",
     }],
     ["b/p", {
@@ -50,7 +45,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="p">p</div',
         "romanjiBothLetter": '<div class="letter" id="b/p">b/p</div',
         "classification": "Plain Consonant",
-        "character": "ㅂ",
         "romanji": "b/p",
     }],
     ["s/t", {
@@ -59,7 +53,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="t">t</div',
         "romanjiBothLetter": '<div class="letter" id="s/t">s/t</div',
         "classification": "Plain Consonant",
-        "character": "ㅅ",
         "romanji": "s/t",
     }],
     ["ng", {
@@ -68,7 +61,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="ng">ng</div',
         "romanjiBothLetter": '<div class="letter" id="ng">ng</div',
         "classification": "Plain Consonant",
-        "character": "ㅇ",
         "romanji": "ng",
     }],
     ["j/t", {
@@ -77,7 +69,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="t">t</div',
         "romanjiBothLetter": '<div class="letter" id="j/t">j/t</div',
         "classification": "Plain Consonant",
-        "character": "ㅈ",
         "romanji": "j/t",
     }],
     ["h/t", {
@@ -86,7 +77,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="t">t</div',
         "romanjiBothLetter": '<div class="letter" id="h/t">h/t</div',
         "classification": "Plain Consonant",
-        "character": "ㅎ",
         "romanji": "h/t",
     }],
     ["kk", {
@@ -95,7 +85,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="kk">kk</div',
         "romanjiBothLetter": '<div class="letter" id="kk">kk</div',
         "classification": "Tense Consonant",
-        "character": "ㄲ",
         "romanji": "kk/k",
     }],
     ["tt", {
@@ -104,7 +93,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="tt">tt</div',
         "romanjiBothLetter": '<div class="letter" id="tt">tt</div',
         "classification": "Tense Consonant",
-        "character": "ㄸ",
         "romanji": "tt",
     }],
     ["pp", {
@@ -113,7 +101,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="pp">pp</div',
         "romanjiBothLetter": '<div class="letter" id="pp">pp</div',
         "classification": "Tense Consonant",
-        "character": "ㅃ",
         "romanji": "pp",
     }],
     ["ss", {
@@ -122,7 +109,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="ss">t</div',
         "romanjiBothLetter": '<div class="letter" id="ss">ss</div',
         "classification": "Tense Consonant",
-        "character": "ㅆ",
         "romanji": "ss/t",
     }],
     ["jj", {
@@ -131,7 +117,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="jj">jj</div',
         "romanjiBothLetter": '<div class="letter" id="jj">jj</div',
         "classification": "Tense Consonant",
-        "character": "ㅉ",
         "romanji": "jj",
     }],
     ["p", {
@@ -140,7 +125,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="p">p</div',
         "romanjiBothLetter": '<div class="letter" id="p">p</div',
         "classification": "Aspirated Consonant",
-        "character": "ㅍ",
         "romanji": "p",
     }],
     ["ch/t", {
@@ -149,7 +133,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="t">t</div',
         "romanjiBothLetter": '<div class="letter" id="ch/t">ch/t</div',
         "classification": "Aspirated Consonant",
-        "character": "ㅊ",
         "romanji": "ch/t",
     }],
     ["k", {
@@ -158,7 +141,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="k">k</div',
         "romanjiBothLetter": '<div class="letter" id="k">k</div',
         "classification": "Aspirated Consonant",
-        "character": "ㅋ",
         "romanji": "k",
     }],
     ["t", {
@@ -167,7 +149,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="t">t</div',
         "romanjiBothLetter": '<div class="letter" id="t">t</div',
         "classification": "Aspirated Consonant",
-        "character": "ㅌ",
         "romanji": "t",
     }],
     ["a", {
@@ -176,7 +157,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="a">a</div',
         "romanjiBothLetter": '<div class="letter" id="a">a</div',
         "classification": "Vowel",
-        "character": "ㅏ",
         "romanji": "a",
     }],
     ["ae", {
@@ -185,7 +165,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="ae">ae</div',
         "romanjiBothLetter": '<div class="letter" id="ae">ae</div',
         "classification": "Vowel",
-        "character": "ㅐ",
         "romanji": "ae",
     }],
     ["eo", {
@@ -194,7 +173,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="eo">eo</div',
         "romanjiBothLetter": '<div class="letter" id="eo">eo</div',
         "classification": "Vowel",
-        "character": "ㅓ",
         "romanji": "eo",
     }],
     ["e", {
@@ -203,7 +181,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="e">e</div',
         "romanjiBothLetter": '<div class="letter" id="e">e</div',
         "classification": "Vowel",
-        "character": "ㅔ",
         "romanji": "e",
     }],
     ["eu", {
@@ -212,7 +189,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="eu">eu</div',
         "romanjiBothLetter": '<div class="letter" id="eu">eu</div',
         "classification": "Vowel",
-        "character": "ㅡ",
         "romanji": "eu",
     }],
     ["i", {
@@ -221,7 +197,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="i">i</div',
         "romanjiBothLetter": '<div class="letter" id="i">i</div',
         "classification": "Vowel",
-        "character": "ㅣ",
         "romanji": "i",
     }],
     ["o", {
@@ -230,7 +205,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="o">o</div',
         "romanjiBothLetter": '<div class="letter" id="o">o</div',
         "classification": "Vowel",
-        "character": "ㅗ",
         "romanji": "o",
     }],
     ["u", {
@@ -239,7 +213,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="u">u</div',
         "romanjiBothLetter": '<div class="letter" id="u">u</div',
         "classification": "Vowel",
-        "character": "ㅜ",
         "romanji": "u",
     }],
     ["ya", {
@@ -248,7 +221,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="ya">ya</div',
         "romanjiBothLetter": '<div class="letter" id="ya">ya</div',
         "classification": "Y Vowel",
-        "character": "ㅑ",
         "romanji": "ya",
     }],
     ["yae", {
@@ -257,7 +229,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="yae">yae</div',
         "romanjiBothLetter": '<div class="letter" id="yae">yae</div',
         "classification": "Y Vowel",
-        "character": "ㅒ",
         "romanji": "yae",
     }],
     ["yeo", {
@@ -266,7 +237,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="yeo">yeo</div',
         "romanjiBothLetter": '<div class="letter" id="yeo">yeo</div',
         "classification": "Y Vowel",
-        "character": "ㅕ",
         "romanji": "yeo",
     }],
     ["ye", {
@@ -275,7 +245,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="ye">ye</div',
         "romanjiBothLetter": '<div class="letter" id="ye">ye</div',
         "classification": "Y Vowel",
-        "character": "ㅖ",
         "romanji": "ye",
     }],
     ["yo", {
@@ -284,7 +253,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="yo">yo</div',
         "romanjiBothLetter": '<div class="letter" id="yo">yo</div',
         "classification": "Y Vowel",
-        "character": "ㅛ",
         "romanji": "yo",
     }],
     ["yu", {
@@ -293,7 +261,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="yu">yu</div',
         "romanjiBothLetter": '<div class="letter" id="yu">yu</div',
         "classification": "Y Vowel",
-        "character": "ㅠ",
         "romanji": "yu",
     }],
     ["wa", {
@@ -302,7 +269,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="wa">wa</div',
         "romanjiBothLetter": '<div class="letter" id="wa">wa</div',
         "classification": "Diphthong",
-        "character": "ㅘ",
         "romanji": "wa",
     }],
     ["wae", {
@@ -311,7 +277,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="wae">wae</div',
         "romanjiBothLetter": '<div class="letter" id="wae">wae</div',
         "classification": "Diphthong",
-        "character": "ㅙ",
         "romanji": "wae",
     }],
     ["oe", {
@@ -320,7 +285,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="oe">oe</div',
         "romanjiBothLetter": '<div class="letter" id="oe">oe</div',
         "classification": "Diphthong",
-        "character": "ㅚ",
         "romanji": "oe",
     }],
     ["wo", {
@@ -329,7 +293,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="wo">wo</div',
         "romanjiBothLetter": '<div class="letter" id="wo">wo</div',
         "classification": "Diphthong",
-        "character": "ㅝ",
         "romanji": "wo",
     }],
     ["we", {
@@ -338,7 +301,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter" id="we">we</div',
         "romanjiBothLetter": '<div class="letter" id="we">we</div',
         "classification": "Diphthong",
-        "character": "ㅞ",
         "romanji": "we",
     }],
     ["wi", {
@@ -347,7 +309,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter">wi</div',
         "romanjiBothLetter": '<div class="letter">wi</div',
         "classification": "Diphthong",
-        "character": "ㅟ",
         "romanji": "wi",
     }],
     ["ui", {
@@ -356,7 +317,6 @@ const Alphabet = new Map([
         "romanjiFinalLetter": '<div class="letter">ui</div',
         "romanjiBothLetter": '<div class="letter">ui</div',
         "classification": "Diphthong",
-        "character": "ㅢ",
         "romanji": "ui",
     }],
 ]);
