@@ -109,6 +109,12 @@
         animation: expand-filter 1000ms infinite;
     }
     
+    .filterText:click~.filterSvg {
+        /* how to alter svg on click */
+        height: 50px;
+        width: 80px;
+    }
+    
     .filter {
         height: 45px;
         width: 73px;
@@ -225,8 +231,7 @@
         color: grey;
     }
     
-    div [filterOn="true"] {
-        font-weight: bold;
+    div [filteron="true"] {
         font-size: 14px;
     }
     

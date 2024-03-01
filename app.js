@@ -15,6 +15,9 @@ const height = 5;
 let optionSelected;
 let gameStarted = false;
 
+let remainingPieces = 0;
+let totalPieces = 0;
+
 // this is for reset or when you return home after initial creation
 function removeGameBoard() {
     document.querySelector('#gameboard').remove();
@@ -112,6 +115,12 @@ function createGameBoard(input) {
         block.addEventListener('dragover', dragOver);
         block.addEventListener('drop', dragDrop);
     });
+
+    // or you could calculate how many available ones there are at the start 
+    // and subtract them each time as u go ????
+    // that might be easier than monitoring 
+
+    gameTopBoard.addEventListener('', gameEndCheck);
 }
 
 function createFilterSection() {
@@ -155,6 +164,7 @@ function createFooterSection() {
 
 function reset() {
     gameStarted = false;
+    remainingPieces = 0;
     removeGameBoard();
     createGameBoard(input);
 }
@@ -346,6 +356,7 @@ function clickFilter(e) {
         })
     } else {
         e.target.setAttribute('filteron', false);
+        // e.target.parentNode.setAttribute('filteron', false);
         const result = document.querySelectorAll(string);
         result.forEach(res => {
             res.setAttribute('clickable', true);
@@ -429,6 +440,7 @@ function createTopBoard() {
         const block = document.createElement('div');
         block.classList.add('block');
         block.classList.add('hangul');
+        block.setAttribute('clickable', true);
         // need to come in here and do this for a few others i think
         if (optionSelected === "Final" && romanji.includes('t')) {
             block.setAttribute('answer', "t");
@@ -448,13 +460,22 @@ let draggedElement;
 
 function GameStarted() {
     gameStarted = true;
+    totalPieces = document.querySelectorAll('div[clickable=true]').length;
     startTimer();
     const filter = document.querySelectorAll(".filter");
     filter.forEach((filters) => {
-            filters.setAttribute('canChangeFilter', false);
-        })
-        // timer starts 
+        filters.setAttribute('canChangeFilter', false);
+    })
 }
+
+function gameEndCheck() {
+    if (totalPieces === remainingPieces) {
+        remainingPieces = 0;
+        totalPieces = 0;
+        stopTimer();
+    }
+}
+
 
 function dragStart(e) {
     if (gameStarted != true) {
@@ -470,13 +491,17 @@ function dragOver(e) {
     e.preventDefault();
 }
 
+
+
 function dragDrop(e) {
     e.stopPropagation();
     let draggedId = draggedElement.parentNode.getAttribute('id');
     let targetAnswer = e.target.parentNode.getAttribute('answer');
     let isActive = e.target.getAttribute('clickable') === false;
-    if (e.target.parentNode.classList.contains('hangul') && (draggedId === targetAnswer) && (isActive === false)) {
+    if (e.target.parentNode.classList.contains('hangul') && (e.target.classList.contains('letter')) && (draggedId === targetAnswer) && (isActive === false)) {
         e.target.parentNode.append(draggedElement);
         e.target.remove();
+        remainingPieces += 1;
     }
+    gameEndCheck();
 }
